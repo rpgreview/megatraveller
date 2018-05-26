@@ -1,0 +1,2568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+<meta name="generator" content="PSPad editor, www.pspad.com">
+<title>MegaTraveller Basic Character Generator</title>
+<script type="text/javascript">
+
+var statMethod='2d6';
+var UPP = new Array(6);
+var UPPval = new Array(6);
+var Age = 18;
+var Terms = 0;
+var Experience = 0;
+var SkillTotal = 0;
+var stStrength = 0;
+var stDexterity = 1;
+var stEndurance = 2;
+var stIntelligence = 3;
+var stEducation = 4;
+var stSocial = 5;
+var statName = new Array(6);
+statName[stStrength]='Strength';
+statName[stDexterity]='Dexterity';
+statName[stEndurance]='Endurance';
+statName[stIntelligence]='Intelligence';
+statName[stEducation]='Education';
+statName[stSocial]='Social';
+
+var ChargenHistory = "";
+var HistoryVisible=0;
+var tmpChargenHistory = "";
+
+var homeWorld = new Array(7);
+var hwStarport = 0;
+var hwSize = 1;
+var hwAtmosphere = 2;
+var hwHydrosphere = 3;
+var hwPopulation = 4;
+var hwLawCode = 5;
+var hwTechCode = 6;
+
+var skAcademic = 0;
+var skAdmin = 1;
+var skACR = 2;
+var skAircraft = 3;
+var skAnimalHandling = 4;
+var skArchaicWeapons = 5;
+var skArtisan = 6;
+var skAssaultRifle = 7;
+var skATV = 8;
+var skAutocannon = 9;
+var skAutorifle = 10;
+var skAxe = 11;
+var skBattleAxe = 12;
+var skBattleDress = 13;
+var skBayonet = 14;
+var skBiology = 15;
+var skBlade = 16;
+var skBladeCombat = 17;
+var skBlowgun = 18;
+var skBodyPistol = 19;
+var skBola = 20;
+var skBoomerang = 21;
+var skBow = 22;
+var skBrawling = 23;
+var skBribery = 24;
+var skBroadsword = 25;
+var skBroker = 26;
+var skCarbine = 27;
+var skCarousing = 28;
+var skChemistry = 29;
+var skCombatEng = 30;
+var skCombatRifleman = 31;
+var skCommunications = 32;
+var skComputer = 33;
+var skCrossbow = 34;
+var skCudgel = 35;
+var skCutlass = 36;
+var skDagger = 37;
+var skDemolitions = 38;
+var skDisguise = 39;
+var skEarlyFirearms = 40;
+var skEconomic = 41;
+var skElectronics = 42;
+var skEnergyWeapons = 43;
+var skEngineering = 44;
+var skEnviron = 45;
+var skEquestrian = 46;
+var skExploratory = 47;
+var skFAGunnery = 48;
+var skFleetTactics = 49;
+var skFoil = 50;
+var skForensic = 51;
+var skForgery = 52;
+var skForwardObserver = 53;
+var skFusionGun = 54;
+var skGambling = 55;
+var skGaussRifle = 56;
+var skGenetics = 57;
+var skGravBelt = 58;
+var skGravVehicle = 59;
+var skGravitics = 60;
+var skGrenadeLauncher = 61;
+var skGuardHuntingBeasts = 62;
+var skGunCombat = 63;
+var skGunnery = 64;
+var skHalberd = 65;
+var skHandAxe = 66;
+var skHandCombat = 67;
+var skHandgun = 68;
+var skHeavyWeapons = 69;
+var skHelicopter = 70;
+var skHerding = 71;
+var skHighEnergyWeapons = 72;
+var skHighGEnviron = 73;
+var skHistory = 74;
+var skHovercraft = 75;
+var skHunting = 76;
+var skInborn = 77;
+var skInstruction = 78;
+var skInterpersonal = 79;
+var skInterrogation = 80;
+var skInterview = 81;
+var skIntrusion = 82;
+var skJackofAllTrades = 83;
+var skJetPropelledAircraft = 84;
+var skLargeBlade = 85;
+var skLargeWatercraft = 86;
+var skLaserPistol = 87;
+var skLaserRifle = 88;
+var skLaserWeapons = 89;
+var skLeader = 90;
+var skLegal = 91;
+var skLiaison = 92;
+var skLightAssaultGun = 93;
+var skLightherThanAirCraft = 94;
+var skLinguistics = 95;
+var skMachineGun = 96;
+var skMassDrivers = 97;
+var skMechanical = 98;
+var skMedical = 99;
+var skMental = 100;
+var skMesonGuns = 101;
+var skMortarsAndHowitzers = 102;
+var skNavalArchitect = 103;
+var skNavigation = 104;
+var skNeuralPistol = 105;
+var skNeuralRifle = 106;
+var skNeuralWeapons = 107;
+var skPersuasion = 108;
+var skPhysical = 109;
+var skPhysics = 110;
+var skPike = 111;
+var skPilot = 112;
+var skPistol = 113;
+var skPlasmaGun = 114;
+var skPolearm = 115;
+var skPropDrivenAircraft = 116;
+var skProspecting = 117;
+var skRecon = 118;
+var skRecruiting = 119;
+var skRevolver = 120;
+var skRifle = 121;
+var skRifleman = 122;
+var skRobotOps = 123;
+var skRobotics = 124;
+var skScience = 125;
+var skSensorOps = 126;
+var skScreens = 127;
+var skShipsTactics = 128;
+var skShipsBoat = 129;
+var skSling = 130;
+var skSmallBlade = 131;
+var skSmallWatercraft = 132;
+var skSnubPistol = 133;
+var skSpace = 134;
+var skSpaceCombat = 135;
+var skSpaceTech = 136;
+var skSpear = 137;
+var skSpecialCombat = 138;
+var skSpinalWeapons = 139;
+var skStealth = 140;
+var skSteward = 141;
+var skStreetwise = 142;
+var skSubmachinegun = 143;
+var skSurvey = 144;
+var skSurvival = 145;
+var skSword = 146;
+var skTactics = 147;
+var skTechnical = 148;
+var skTrader = 149;
+var skTrackedVehicle = 150;
+var skTurretWeapons = 151;
+var skVaccSuit = 152;
+var skVehicle = 153;
+var skVice = 154;
+var skVRFGaussGun = 155;
+var skWheeledVehicle = 156;
+var skZeroGEnviron = 157;
+var skIncreaseStrength = 158;
+var skIncreaseDexterity = 159;
+var skIncreaseEndurance = 160;
+var skIncreaseIntelligence = 161;
+var skIncreaseEducation = 162;
+var skIncreaseSocial = 163;
+var skillName = new Array(164);
+var skillCascade = new Array(164);
+var skillCascSkills = new Array(164);
+var skillZeroImpliedByCount = new Array(164);
+var skillZeroImpliedBySkills = new Array(164);
+var skillOneImpliedByCount = new Array(164);
+var skillOneImpliedBySkills = new Array(164);
+var skillSameLevelImpliedByCount = new Array(164);
+var skillSameLevelImpliedBySkills = new Array(164);
+var skillLevelLowerImpliedByCount = new Array(164);
+var skillLevelLowerImpliedBySkills = new Array(164);
+var skillValue = new Array(164);
+var cascadeQueue = new Array(8);
+var cascadeQueueCount = 0;
+var cascadeQueuePrompt = "";
+var skillsToAdd = 0;
+
+for ( i=0; i<164; i++ ) 
+{
+  skillValue[i]=-1;
+  skillZeroImpliedByCount[i]=0;
+  skillOneImpliedByCount[i]=0;
+  skillSameLevelImpliedByCount[i]=0;
+  skillLevelLowerImpliedByCount[i]=0;
+}
+var maxSkill=0;
+
+skillName[skAcademic]='Academic';
+skillCascade[skAcademic]=6;
+skillCascSkills[skAcademic]= new Array(skAdmin,skHistory,skLinguistics,skPersuasion,skScience,skIncreaseEducation);
+
+skillName[skAdmin]='Admin';
+skillCascade[skAdmin]=0;
+skillLevelLowerImpliedByCount[skAdmin]=2;
+skillLevelLowerImpliedBySkills[skAdmin] = new Array(skLegal,skLiaison);
+
+skillName[skACR]='Advanced Combat Rifle';
+skillCascade[skACR]=0;
+skillSameLevelImpliedByCount[skACR]=1;
+skillSameLevelImpliedBySkills[skACR] = skCombatRifleman;
+
+skillName[skAircraft]='Aircraft';
+skillCascade[skAircraft]=4;
+skillCascSkills[skAircraft]= new Array(skHelicopter,skJetPropelledAircraft,skLightherThanAirCraft,skPropDrivenAircraft);
+
+skillName[skAnimalHandling]='Animal Handling';
+skillCascade[skAnimalHandling]=3;
+skillCascSkills[skAnimalHandling]= new Array(skGuardHuntingBeasts,skEquestrian,skHerding);
+
+skillName[skArchaicWeapons]='Archaic Weapons';
+skillCascade[skArchaicWeapons]=7;
+skillCascSkills[skArchaicWeapons]= new Array(skBlowgun,skBola,skBoomerang,skBow,skCrossbow,skEarlyFirearms,skSling);
+
+skillName[skArtisan]='Artisan';
+skillCascade[skArtisan]=0;
+
+skillName[skAssaultRifle]='Assault Rifle';
+skillCascade[skAssaultRifle]=0;
+skillSameLevelImpliedByCount[skAssaultRifle]=1;
+skillSameLevelImpliedBySkills[skAssaultRifle] = skCombatRifleman;
+
+skillName[skATV]='ATV';
+skillCascade[skATV]=0;
+
+skillName[skAutocannon]='Autocannon';
+skillCascade[skAutocannon]=0;
+skillSameLevelImpliedByCount[skAutocannon]=1;
+skillSameLevelImpliedBySkills[skAutocannon] = skHeavyWeapons;
+
+skillName[skAutorifle]='Autorifle';
+skillCascade[skAutorifle]=0;
+skillSameLevelImpliedByCount[skAutorifle]=1;
+skillSameLevelImpliedBySkills[skAutorifle] = skRifleman;
+
+skillName[skAxe]='Axe';
+skillCascade[skAxe]=0;
+
+skillName[skBattleAxe]='Battle Axe';
+skillCascade[skBattleAxe]=0;
+skillSameLevelImpliedByCount[skBattleAxe]=1;
+skillSameLevelImpliedBySkills[skBattleAxe] = skAxe;
+
+skillName[skBattleDress]='Battle Dress';
+skillCascade[skBattleDress]=0;
+
+skillName[skBayonet]='Bayonet';
+skillCascade[skBayonet]=0;
+skillSameLevelImpliedByCount[skBayonet]=1;
+skillSameLevelImpliedBySkills[skBayonet] = skPolearm;
+
+skillName[skBiology]='Biology';
+skillCascade[skBiology]=0;
+
+skillName[skBlade]='Blade';
+skillCascade[skBlade]=0;
+skillSameLevelImpliedByCount[skBlade]=1;
+skillSameLevelImpliedBySkills[skBlade] = skSmallBlade;
+
+skillName[skBladeCombat]='Blade Combat';
+skillCascade[skBladeCombat]=6;
+skillCascSkills[skBladeCombat]= new Array(skAxe,skCudgel,skFoil,skLargeBlade,skPolearm,skSmallBlade);
+
+skillName[skBlowgun]='Blowgun';
+skillCascade[skBlowgun]=0;
+
+skillName[skBodyPistol]='Body Pistol';
+skillCascade[skBodyPistol]=0;
+skillSameLevelImpliedByCount[skBodyPistol]=1;
+skillSameLevelImpliedBySkills[skBodyPistol] = skHandgun;
+
+skillName[skBola]='Bola';
+skillCascade[skBola]=0;
+
+skillName[skBoomerang]='Boomerang';
+skillCascade[skBoomerang]=0;
+
+skillName[skBow]='Bow';
+skillCascade[skBow]=0;
+
+skillName[skBrawling]='Brawling';
+skillCascade[skBrawling]=0;
+
+skillName[skBribery]='Bribery';
+skillCascade[skBribery]=0;
+
+skillName[skBroadsword]='Broadsword';
+skillCascade[skBroadsword]=0;
+skillSameLevelImpliedByCount[skBroadsword]=1;
+skillSameLevelImpliedBySkills[skBroadsword] = skLargeBlade;
+
+skillName[skBroker]='Broker';
+skillCascade[skBroker]=0;
+
+skillName[skCarbine]='Carbine';
+skillCascade[skCarbine]=0;
+skillSameLevelImpliedByCount[skCarbine]=2;
+skillSameLevelImpliedBySkills[skCarbine] = new Array(skCombatRifleman,skRifleman);
+
+skillName[skCarousing]='Carousing';
+skillCascade[skCarousing]=0;
+
+skillName[skChemistry]='Chemistry';
+skillCascade[skChemistry]=0;
+
+skillName[skCombatEng]='Combat Engineering';
+skillCascade[skCombatEng]=0;
+
+skillName[skCombatRifleman]='Combat Rifleman';
+skillCascade[skCombatRifleman]=0;
+
+skillName[skCommunications]='Communications';
+skillCascade[skCommunications]=0;
+
+skillName[skComputer]='Computer';
+skillCascade[skComputer]=0;
+skillLevelLowerImpliedByCount[skComputer]=1;
+skillLevelLowerImpliedBySkills[skComputer] = skRobotics;
+
+skillName[skCrossbow]='Crossbow';
+skillCascade[skCrossbow]=0;
+
+skillName[skCudgel]='Cudgel';
+skillCascade[skCudgel]=0;
+
+skillName[skCutlass]='Cutlass';
+skillCascade[skCutlass]=0;
+skillSameLevelImpliedByCount[skCutlass]=1;
+skillSameLevelImpliedBySkills[skCutlass] = skLargeBlade;
+
+skillName[skDagger]='Dagger';
+skillCascade[skDagger]=0;
+skillSameLevelImpliedByCount[skDagger]=1;
+skillSameLevelImpliedBySkills[skDagger] = skSmallBlade;
+
+skillName[skDemolitions]='Demolitions';
+skillCascade[skDemolitions]=0;
+
+skillName[skDisguise]='Disguise';
+skillCascade[skDisguise]=0;
+
+skillName[skEarlyFirearms]='Early Firearms';
+skillCascade[skEarlyFirearms]=0;
+
+skillName[skEconomic]='Economic';
+skillCascade[skEconomic]=4;
+skillCascSkills[skEconomic]= new Array(skAdmin,skBroker,skLegal,skTrader);
+
+skillName[skElectronics]='Electronics';
+skillCascade[skElectronics]=0;
+
+skillName[skEnergyWeapons]='Energy Weapons';
+skillCascade[skEnergyWeapons]=0;
+skillZeroImpliedByCount[skEnergyWeapons]=1;
+skillZeroImpliedBySkills[skEnergyWeapons] = skHighGEnviron;
+
+skillName[skEngineering]='Engineering';
+skillCascade[skEngineering]=0;
+
+skillName[skEnviron]='Environ';
+skillCascade[skEnviron]=6;
+skillCascSkills[skEnviron]= new Array(skAnimalHandling,skArchaicWeapons,skHunting,skRecon,skStealth,skSurvival);
+
+skillName[skEquestrian]='Equestrian';
+skillCascade[skEquestrian]=0;
+
+skillName[skExploratory]='Exploratory';
+skillCascade[skExploratory]=6;
+skillCascSkills[skExploratory]= new Array(skPilot,skSensorOps,skSurvey,skSurvival,skVaccSuit,skVehicle);
+
+skillName[skFAGunnery]='FA Gunnery';
+skillCascade[skFAGunnery]=4;
+skillCascSkills[skFAGunnery]= new Array(skHighEnergyWeapons,skMassDrivers,skMesonGuns,skMortarsAndHowitzers);
+
+skillName[skFleetTactics]='Fleet Tactics';
+skillCascade[skFleetTactics]=0;
+
+skillName[skFoil]='Foil';
+skillCascade[skFoil]=0;
+
+skillName[skForensic]='Forensic';
+skillCascade[skForensic]=0;
+
+skillName[skForgery]='Forgery';
+skillCascade[skForgery]=0;
+
+skillName[skForwardObserver]='Forward Observer';
+skillCascade[skForwardObserver]=0;
+
+skillName[skFusionGun]='Fusion Gun';
+skillCascade[skFusionGun]=0;
+skillSameLevelImpliedByCount[skFusionGun]=1;
+skillSameLevelImpliedBySkills[skFusionGun] = skEnergyWeapons;
+
+skillName[skGambling]='Gambling';
+skillCascade[skGambling]=0;
+
+skillName[skGaussRifle]='Gauss Rifle';
+skillCascade[skGaussRifle]=0;
+skillSameLevelImpliedByCount[skGaussRifle]=1;
+skillSameLevelImpliedBySkills[skGaussRifle] = skCombatRifleman;
+
+skillName[skGenetics]='Genetics';
+skillCascade[skGenetics]=0;
+skillLevelLowerImpliedByCount[skGenetics]=1;
+skillLevelLowerImpliedBySkills[skGenetics] = skBiology;
+
+skillName[skGravBelt]='Grav Belt';
+skillCascade[skGravBelt]=0;
+skillLevelLowerImpliedByCount[skGravBelt]=1;
+skillLevelLowerImpliedBySkills[skGravBelt] = skGravVehicle;
+
+skillName[skGravVehicle]='Grav Vehicle';
+skillCascade[skGravVehicle]=0;
+
+skillName[skGravitics]='Gravitics';
+skillCascade[skGravitics]=0;
+
+skillName[skGrenadeLauncher]='Grenade Launcher';
+skillCascade[skGrenadeLauncher]=0;
+skillSameLevelImpliedByCount[skGrenadeLauncher]=1;
+skillSameLevelImpliedBySkills[skGrenadeLauncher] = skHeavyWeapons;
+
+skillName[skGuardHuntingBeasts]='Guard/Hunting Beasts';
+skillCascade[skGuardHuntingBeasts]=0;
+
+skillName[skGunCombat]='Gun Combat';
+skillCascade[skGunCombat]=6;
+skillCascSkills[skGunCombat]= new Array(skEnergyWeapons,skHandgun,skLaserWeapons,skNeuralWeapons,skRifleman,skSubmachinegun);
+
+skillName[skGunnery]='Gunnery';
+skillCascade[skGunnery]=3;
+skillCascSkills[skGunnery]= new Array(skScreens,skSpinalWeapons,skTurretWeapons);
+
+skillName[skHalberd]='Halberd';
+skillCascade[skHalberd]=0;
+skillSameLevelImpliedByCount[skHalberd]=1;
+skillSameLevelImpliedBySkills[skHalberd] = skPolearm;
+
+skillName[skHandAxe]='Hand Axe';
+skillCascade[skHandAxe]=0;
+skillSameLevelImpliedByCount[skHandAxe]=1;
+skillSameLevelImpliedBySkills[skHandAxe] = skAxe;
+
+skillName[skHandCombat]='Hand Combat';
+skillCascade[skHandCombat]=4;
+skillCascSkills[skHandCombat]= new Array(skBladeCombat,skBrawling,skIncreaseEndurance,skIncreaseStrength);
+
+skillName[skHandgun]='Handgun';
+skillCascade[skHandgun]=0;
+
+skillName[skHeavyWeapons]='Heavy Weapons';
+skillCascade[skHeavyWeapons]=0;
+
+skillName[skHelicopter]='Helicopter';
+skillCascade[skHelicopter]=0;
+skillLevelLowerImpliedByCount[skHelicopter]=3;
+skillLevelLowerImpliedBySkills[skHelicopter] = new Array(skJetPropelledAircraft,skLightherThanAirCraft,skPropDrivenAircraft);
+
+skillName[skHerding]='Herding';
+skillCascade[skHerding]=0;
+
+skillName[skHighEnergyWeapons]='High-Energy Weapons';
+skillCascade[skHighEnergyWeapons]=0;
+skillLevelLowerImpliedByCount[skHighEnergyWeapons]=3;
+skillLevelLowerImpliedBySkills[skHighEnergyWeapons] = new Array(skMassDrivers,skMesonGuns,skMortarsAndHowitzers);
+
+skillName[skHighGEnviron]='High-G Environ';
+skillCascade[skHighGEnviron]=0;
+
+skillName[skHistory]='History';
+skillCascade[skHistory]=0;
+
+skillName[skHovercraft]='Hovercraft';
+skillCascade[skHovercraft]=0;
+skillLevelLowerImpliedByCount[skHovercraft]=2;
+skillLevelLowerImpliedBySkills[skHovercraft] = new Array(skLargeWatercraft,skSmallWatercraft);
+
+skillName[skHunting]='Hunting';
+skillCascade[skHunting]=0;
+
+skillName[skInborn]='Inborn';
+skillCascade[skInborn]=5;
+skillCascSkills[skInborn]= new Array(skArtisan,skCarousing,skInstruction,skJackofAllTrades,skLeader);
+
+skillName[skInstruction]='Instruction';
+skillCascade[skInstruction]=0;
+
+skillName[skInterpersonal]='Interpersonal';
+skillCascade[skInterpersonal]=5;
+skillCascSkills[skInterpersonal]= new Array(skAdmin,skInterview,skLiaison,skLinguistics,skSteward);
+
+skillName[skInterrogation]='Interrogation';
+skillCascade[skInterrogation]=0;
+skillLevelLowerImpliedByCount[skInterrogation]=1;
+skillLevelLowerImpliedBySkills[skInterrogation] = skInterview;
+
+skillName[skInterview]='Interview';
+skillCascade[skInterview]=0;
+
+skillName[skIntrusion]='Intrusion';
+skillCascade[skIntrusion]=0;
+
+skillName[skJackofAllTrades]='Jack-of-all-Trades';
+skillCascade[skJackofAllTrades]=0;
+
+skillName[skJetPropelledAircraft]='Jet-propelled Aircraft';
+skillCascade[skJetPropelledAircraft]=0;
+skillLevelLowerImpliedByCount[skJetPropelledAircraft]=3;
+skillLevelLowerImpliedBySkills[skJetPropelledAircraft] = new Array(skHelicopter,skLightherThanAirCraft,skPropDrivenAircraft);
+
+skillName[skLargeBlade]='Large Blade';
+skillCascade[skLargeBlade]=0;
+
+skillName[skLargeWatercraft]='Large Watercraft';
+skillCascade[skLargeWatercraft]=0;
+skillLevelLowerImpliedByCount[skLargeWatercraft]=2;
+skillLevelLowerImpliedBySkills[skLargeWatercraft] = new Array(skHovercraft,skSmallWatercraft);
+
+skillName[skLaserPistol]='Laser Pistol';
+skillCascade[skLaserPistol]=0;
+skillSameLevelImpliedByCount[skLaserPistol]=1;
+skillSameLevelImpliedBySkills[skLaserPistol] = skLaserWeapons;
+
+skillName[skLaserRifle]='Laser Rifle';
+skillCascade[skLaserRifle]=0;
+skillSameLevelImpliedByCount[skLaserRifle]=1;
+skillSameLevelImpliedBySkills[skLaserRifle] = skLaserWeapons;
+
+skillName[skLaserWeapons]='Laser Weapons';
+skillCascade[skLaserWeapons]=0;
+skillZeroImpliedByCount[skLaserWeapons]=1;
+skillZeroImpliedBySkills[skLaserWeapons] = skHighGEnviron;
+
+skillName[skLeader]='Leader';
+skillCascade[skLeader]=0;
+
+skillName[skLegal]='Legal';
+skillCascade[skLegal]=0;
+
+skillName[skLiaison]='Liaison';
+skillCascade[skLiaison]=0;
+
+skillName[skLightAssaultGun]='Light Assault Gun';
+skillCascade[skLightAssaultGun]=0;
+skillSameLevelImpliedByCount[skLightAssaultGun]=1;
+skillSameLevelImpliedBySkills[skLightAssaultGun] = skHeavyWeapons;
+
+skillName[skLightherThanAirCraft]='Lighter-than-air Craft';
+skillCascade[skLightherThanAirCraft]=0;
+skillLevelLowerImpliedByCount[skLightherThanAirCraft]=3;
+skillLevelLowerImpliedBySkills[skLightherThanAirCraft] = new Array(skHelicopter,skJetPropelledAircraft,skPropDrivenAircraft);
+
+skillName[skLinguistics]='Linguistics';
+skillCascade[skLinguistics]=0;
+
+skillName[skMachineGun]='Machine Gun';
+skillCascade[skMachineGun]=0;
+skillSameLevelImpliedByCount[skMachineGun]=1;
+skillSameLevelImpliedBySkills[skMachineGun] = skHeavyWeapons;
+
+skillName[skMassDrivers]='Mass Drivers';
+skillCascade[skMassDrivers]=0;
+skillLevelLowerImpliedByCount[skMassDrivers]=3;
+skillLevelLowerImpliedBySkills[skMassDrivers] = new Array(skHighEnergyWeapons,skMesonGuns,skMortarsAndHowitzers);
+
+skillName[skMechanical]='Mechanical';
+skillCascade[skMechanical]=0;
+
+skillName[skMedical]='Medical';
+skillCascade[skMedical]=0;
+
+skillName[skMental]='Mental';
+skillCascade[skMental]=2;
+skillCascSkills[skMental]= new Array(skIncreaseIntelligence,skIncreaseEducation);
+
+skillName[skMesonGuns]='Meson Guns';
+skillCascade[skMesonGuns]=0;
+skillLevelLowerImpliedByCount[skMesonGuns]=3;
+skillLevelLowerImpliedBySkills[skMesonGuns] = new Array(skHighEnergyWeapons,skMassDrivers,skMortarsAndHowitzers);
+
+skillName[skMortarsAndHowitzers]='Mortars and Howitzers';
+skillCascade[skMortarsAndHowitzers]=0;
+skillLevelLowerImpliedByCount[skMortarsAndHowitzers]=3;
+skillLevelLowerImpliedBySkills[skMortarsAndHowitzers] = new Array(skHighEnergyWeapons,skMassDrivers,skMesonGuns);
+
+skillName[skNavalArchitect]='Naval Architect';
+skillCascade[skNavalArchitect]=0;
+
+skillName[skNavigation]='Navigation';
+skillCascade[skNavigation]=0;
+
+skillName[skNeuralPistol]='Neural Pistol';
+skillCascade[skNeuralPistol]=0;
+skillSameLevelImpliedByCount[skNeuralPistol]=1;
+skillSameLevelImpliedBySkills[skNeuralPistol] = skNeuralWeapons;
+
+skillName[skNeuralRifle]='Neural Rifle';
+skillCascade[skNeuralRifle]=0;
+skillSameLevelImpliedByCount[skNeuralRifle]=1;
+skillSameLevelImpliedBySkills[skNeuralRifle] = skNeuralWeapons;
+
+skillName[skNeuralWeapons]='Neural Weapons';
+skillCascade[skNeuralWeapons]=0;
+
+skillName[skPersuasion]='Persuasion';
+skillCascade[skPersuasion]=0;
+
+skillName[skPhysical]='Physical';
+skillCascade[skPhysical]=3;
+skillCascSkills[skPhysical]= new Array(skIncreaseStrength,skIncreaseDexterity,skIncreaseEndurance);
+
+skillName[skPhysics]='Physics';
+skillCascade[skPhysics]=0;
+
+skillName[skPike]='Pike';
+skillCascade[skPike]=0;
+skillSameLevelImpliedByCount[skPike]=1;
+skillSameLevelImpliedBySkills[skPike] = skPolearm;
+
+skillName[skPilot]='Pilot';
+skillCascade[skPilot]=0;
+
+skillName[skPistol]='Pistol';
+skillCascade[skPistol]=0;
+skillSameLevelImpliedByCount[skPistol]=1;
+skillSameLevelImpliedBySkills[skPistol] = skHandgun;
+
+skillName[skPlasmaGun]='Plasma Gun';
+skillCascade[skPlasmaGun]=0;
+skillSameLevelImpliedByCount[skPlasmaGun]=1;
+skillSameLevelImpliedBySkills[skPlasmaGun] = skEnergyWeapons;
+
+skillName[skPolearm]='Polearm';
+skillCascade[skPolearm]=0;
+
+skillName[skPropDrivenAircraft]='Prop-driven Aircraft';
+skillCascade[skPropDrivenAircraft]=0;
+skillLevelLowerImpliedByCount[skPropDrivenAircraft]=3;
+skillLevelLowerImpliedBySkills[skPropDrivenAircraft] = new Array(skHelicopter,skJetPropelledAircraft,skLightherThanAirCraft);
+
+skillName[skProspecting]='Prospecting';
+skillCascade[skProspecting]=0;
+
+skillName[skRecon]='Recon';
+skillCascade[skRecon]=0;
+
+skillName[skRecruiting]='Recruiting';
+skillCascade[skRecruiting]=0;
+
+skillName[skRevolver]='Revolver';
+skillCascade[skRevolver]=0;
+skillSameLevelImpliedByCount[skRevolver]=1;
+skillSameLevelImpliedBySkills[skRevolver] = skHandgun;
+
+skillName[skRifle]='Rifle';
+skillCascade[skRifle]=0;
+skillSameLevelImpliedByCount[skRifle]=2;
+skillSameLevelImpliedBySkills[skRifle] = new Array(skCombatRifleman,skRifleman);
+
+skillName[skRifleman]='Rifleman';
+skillCascade[skRifleman]=0;
+
+skillName[skRobotOps]='Robot Ops';
+skillCascade[skRobotOps]=0;
+skillLevelLowerImpliedByCount[skRobotOps]=1;
+skillLevelLowerImpliedBySkills[skRobotOps] = skComputer;
+skillSameLevelImpliedByCount[skRobotOps]=1;
+skillSameLevelImpliedBySkills[skRobotOps] = skRobotics;
+
+skillName[skRobotics]='Robotics';
+skillCascade[skRobotics]=0;
+
+skillName[skScience]='Science';
+skillCascade[skScience]=7;
+skillCascSkills[skScience]= new Array(skBiology,skChemistry,skGenetics,skForensic,skMedical,skPhysics,skRobotics);
+
+skillName[skSensorOps]='Sensor Ops';
+skillCascade[skSensorOps]=0;
+skillLevelLowerImpliedByCount[skSensorOps]=2;
+skillLevelLowerImpliedBySkills[skSensorOps] = new Array(skNavigation,skSurvey);
+skillOneImpliedByCount[skSensorOps]=1;
+skillOneImpliedBySkills[skSensorOps] = skRecon;
+
+skillName[skScreens]='Screens';
+skillCascade[skScreens]=0;
+
+skillName[skShipsTactics]='Ships Tactics';
+skillCascade[skShipsTactics]=0;
+skillLevelLowerImpliedByCount[skShipsTactics]=1;
+skillLevelLowerImpliedBySkills[skShipsTactics] = skTactics;
+
+skillName[skShipsBoat]='Ships Boat';
+skillCascade[skShipsBoat]=0;
+skillLevelLowerImpliedByCount[skShipsBoat]=1;
+skillLevelLowerImpliedBySkills[skShipsBoat] = skPilot;
+
+skillName[skSling]='Sling';
+skillCascade[skSling]=0;
+
+skillName[skSmallBlade]='Small Blade';
+skillCascade[skSmallBlade]=0;
+
+skillName[skSmallWatercraft]='Small Watercraft';
+skillCascade[skSmallWatercraft]=0;
+skillLevelLowerImpliedByCount[skSmallWatercraft]=2;
+skillLevelLowerImpliedBySkills[skSmallWatercraft] = new Array(skHovercraft,skLargeWatercraft);
+
+skillName[skSnubPistol]='Snub Pistol';
+skillCascade[skSnubPistol]=0;
+skillSameLevelImpliedByCount[skSnubPistol]=1;
+skillSameLevelImpliedBySkills[skSnubPistol] = skHandgun;
+
+skillName[skSpace]='Space';
+skillCascade[skSpace]=6;
+skillCascSkills[skSpace]= new Array(skEngineering,skNavigation,skPilot,skSensorOps,skShipsBoat,skVaccSuit);
+
+skillName[skSpaceCombat]='Space Combat';
+skillCascade[skSpaceCombat]=4;
+skillCascSkills[skSpaceCombat]= new Array(skGunnery,skSensorOps,skShipsTactics,skTactics);
+
+skillName[skSpaceTech]='Space Tech';
+skillCascade[skSpaceTech]=5;
+skillCascSkills[skSpaceTech]= new Array(skCommunications,skComputer,skEngineering,skGravitics,skVaccSuit);
+
+skillName[skSpear]='Spear';
+skillCascade[skSpear]=0;
+skillSameLevelImpliedByCount[skSpear]=1;
+skillSameLevelImpliedBySkills[skSpear] = skPolearm;
+
+skillName[skSpecialCombat]='Special Combat';
+skillCascade[skSpecialCombat]=12;
+skillCascSkills[skSpecialCombat]= new Array(skBattleDress,skCombatEng,skCombatRifleman,skDemolitions,skFAGunnery,skForwardObserver,skGravBelt,skHeavyWeapons,skHighEnergyWeapons,skHighGEnviron,skStealth,skZeroGEnviron);
+
+skillName[skSpinalWeapons]='Spinal Weapons';
+skillCascade[skSpinalWeapons]=0;
+
+skillName[skStealth]='Stealth';
+skillCascade[skStealth]=0;
+
+skillName[skSteward]='Steward';
+skillCascade[skSteward]=0;
+skillLevelLowerImpliedByCount[skSteward]=1;
+skillLevelLowerImpliedBySkills[skSteward] = skCarousing;
+
+skillName[skStreetwise]='Streetwise';
+skillCascade[skStreetwise]=0;
+skillLevelLowerImpliedByCount[skStreetwise]=1;
+skillLevelLowerImpliedBySkills[skStreetwise] = skLiaison;
+
+skillName[skSubmachinegun]='Submachinegun';
+skillCascade[skSubmachinegun]=0;
+
+skillName[skSurvey]='Survey';
+skillCascade[skSurvey]=0;
+
+skillName[skSurvival]='Survival';
+skillCascade[skSurvival]=0;
+
+skillName[skSword]='Sword';
+skillCascade[skSword]=0;
+skillSameLevelImpliedByCount[skSword]=1;
+skillSameLevelImpliedBySkills[skSword] = skLargeBlade;
+
+skillName[skTactics]='Tactics';
+skillCascade[skTactics]=0;
+
+skillName[skTechnical]='Technical';
+skillCascade[skTechnical]=6;
+skillCascSkills[skTechnical]= new Array(skCommunications,skComputer,skElectronics,skGravitics,skRobotOps,skSensorOps);
+
+skillName[skTrader]='Trader';
+skillCascade[skTrader]=0;
+
+skillName[skTrackedVehicle]='Tracked Vehicle';
+skillCascade[skTrackedVehicle]=0;
+skillSameLevelImpliedByCount[skTrackedVehicle]=1;
+skillSameLevelImpliedBySkills[skTrackedVehicle] = skATV;
+skillLevelLowerImpliedByCount[skTrackedVehicle]=1;
+skillLevelLowerImpliedBySkills[skTrackedVehicle] = skWheeledVehicle;
+
+skillName[skTurretWeapons]='Turret Weapons';
+skillCascade[skTurretWeapons]=0;
+
+skillName[skVaccSuit]='Vacc Suit';
+skillCascade[skVaccSuit]=0;
+skillSameLevelImpliedByCount[skVaccSuit]=1;
+skillSameLevelImpliedBySkills[skVaccSuit] = skBattleDress;
+
+skillName[skVehicle]='Vehicle';
+skillCascade[skVehicle]=11;
+skillCascSkills[skVehicle]= new Array(skGravVehicle,skHelicopter,skHovercraft,skJetPropelledAircraft,skLargeWatercraft,skLightherThanAirCraft,skPropDrivenAircraft,skShipsBoat,skSmallWatercraft,skTrackedVehicle,skWheeledVehicle);
+
+skillName[skVice]='Vice';
+skillCascade[skVice]=6;
+skillCascSkills[skVice]= new Array(skBribery,skDisguise,skForgery,skGambling,skIntrusion,skStreetwise);
+
+skillName[skVRFGaussGun]='VRF Gauss Gun';
+skillCascade[skVRFGaussGun]=0;
+skillSameLevelImpliedByCount[skVRFGaussGun]=1;
+skillSameLevelImpliedBySkills[skVRFGaussGun] = skHeavyWeapons;
+
+skillName[skWheeledVehicle]='Wheeled Vehicle';
+skillCascade[skWheeledVehicle]=0;
+skillSameLevelImpliedByCount[skWheeledVehicle]=1;
+skillSameLevelImpliedBySkills[skWheeledVehicle] = skATV;
+skillLevelLowerImpliedByCount[skWheeledVehicle]=1;
+skillLevelLowerImpliedBySkills[skWheeledVehicle] = skTrackedVehicle;
+
+skillName[skZeroGEnviron]='Zero-G Environ';
+skillCascade[skZeroGEnviron]=0;
+
+skillName[skIncreaseStrength]='+1 Strength';
+skillCascade[skIncreaseStrength]=0;
+
+skillName[skIncreaseDexterity]='+1 Dexterity';
+skillCascade[skIncreaseDexterity]=0;
+
+skillName[skIncreaseEndurance]='+1 Endurance';
+skillCascade[skIncreaseEndurance]=0;
+
+skillName[skIncreaseIntelligence]='+1 Intelligence';
+skillCascade[skIncreaseIntelligence]=0;
+
+skillName[skIncreaseEducation]='+1 Education';
+skillCascade[skIncreaseEducation]=0;
+
+skillName[skIncreaseSocial]='+1 Social';
+skillCascade[skIncreaseSocial]=0;
+
+var numTypesOfWeapon = 31;
+var isWeapon = new Array(skACR,skAssaultRifle,skAutorifle,skBattleAxe,skBayonet,skBlade,skBlowgun,skBodyPistol,skBola,skBoomerang,skBow,skBroadsword,skCarbine,skCrossbow,skCudgel,skCutlass,skDagger,skFoil,skGaussRifle,skHalberd,skHandAxe,skLaserPistol,skLaserRifle,skPike,skPistol,skRevolver,skRifle,skSling,skSnubPistol,skSubmachinegun,skSword);
+var gotWeapon = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+var crNavy = 0;
+var crMarines = 1;
+var crArmy = 2;
+var crScout = 3;
+var crFlyer = 4;
+var crSailor = 5;
+var crLawEnf = 6;
+var crDoctor = 7;
+var crDiplomat = 8;
+var crBureaucrat = 9;
+var crScientist = 10;
+var crNoble = 11;
+var crMerchant = 12;
+var crBelter = 13;
+var crPirate = 14;
+var crRogue = 15;
+var crHunter = 16;
+var crBarbarian = 17;
+
+var enlistmentRollNeeded = new Array(18);
+var survivalRollNeeded = new Array(18);
+var commissionRollNeeded = new Array(18);
+var promotionRollNeeded = new Array(18);
+var specialRollNeeded = new Array(18);
+var reenlistRollNeeded = new Array(18);
+var madeSurvivalRoll = 0;
+var madeCommissionRoll = 0;
+var madePromotionRoll = 0;
+var madeSpecialRoll = 0;
+var madeReenlistRoll = 0;
+
+var careerName = new Array("Navy","Marines","Army","Scout","Flyer","Sailor","Law Enforcer","Doctor","Diplomat","Bureaucrat","Scientist","Noble","Merchant","Belter","Pirate","Rogue","Hunter","Barbarian");
+var enlistment = new Array("8+","9+","5+","7+","6+","6+","6+","9+","8+","5+","6+","2+","7+","8+","7+","6+","9+","5+");
+var enlistmentDM1skill = new Array(stIntelligence,stIntelligence,stDexterity,stIntelligence,stStrength,stEndurance,stIntelligence,stIntelligence,stEducation,stEducation,stIntelligence,-1,stStrength,stDexterity,stSocial,stSocial,stDexterity,stEndurance);
+var enlistmentDM1value = new Array("8+","8+","6+","6+","7+","10+","7+","8+","8+","8+","9+","-","7+","9+","7-","8-","10+","9+");
+var enlistmentDM2skill = new Array(stEducation,stStrength,stEndurance,stStrength,stDexterity,stStrength,stDexterity,stDexterity,stSocial,stStrength,stEducation,-1,stIntelligence,stIntelligence,stEndurance,stEndurance,stEndurance,stStrength);
+var enlistmentDM2value = new Array("9+","8+","5+","8+","9+","8+","10+","9+","9+","8-","10+","-","6+","6+","9+","7+","9+","10+");
+var draftNumber = new Array(1,2,3,4,5,6,0,0,0,0,0,0,0,0,0,0,0,0);
+var survival = new Array("5+","6+","5+","7+","5+","5+","6+","4+","4+","4+","5+","4+","5+","9+","6+","7+","6+","6+");
+var survivalDMskill = new Array(stIntelligence,stEndurance,stEducation,stEndurance,stDexterity,stEndurance,stIntelligence,stIntelligence,stEducation,stEducation,stEducation,-1,stIntelligence,"terms",stIntelligence,stIntelligence,stStrength,stStrength);
+var survivalDMvalue = new Array("7+","8+","6+","9+","8+","8+","7+","8+","9+","10+","9+","-","7+","-","8+","9+","10+","8+");
+var numSkills = new Array(1,1,1,2,1,1,1,2,1,1,2,1,1,2,1,2,2,1);
+var commission = new Array("10+","9+","5+","-","5+","5+","6+","-","5+","6+","-","5+","4+","-","9+","-","-","6+");
+var commissionDMskill = new Array(stSocial,stEducation,stEndurance,-1,stEducation,stIntelligence,stEducation,-1,stIntelligence,stSocial,-1,stEducation,stIntelligence,-1,stStrength,-1,-1,stStrength);
+var commissionDMvalue = new Array("9+","7+","7+","-","6+","9+","7+","-","8+","9+","-","9+","6+","-","10+","-","-","10+");
+var promotion = new Array("8+","9+","6+","-","8+","6+","8+","-","10+","7+","-","12+","10+","-","8+","-","-","9+");
+var promotionDMskill = new Array(stEducation,stSocial,stEducation,"-",stEducation,stEducation,stEducation,"-",stSocial,stIntelligence,"-",stIntelligence,stIntelligence,"-",stIntelligence,"-","-",stIntelligence);
+var promotionDMvalue = new Array("8+","8+","7+","-","8+","8+","8+","-","10+","9+","-","10+","9+","-","9+","-","-","6+");
+var specialDuty = new Array("5+","4+","6+","4+","6+","6+","4+","6+","5+","6+","5+","6+","4+","6+","5+","5+","6+","7+");
+var reenlist = new Array("6+","6+","7+","3+","6+","6+","6+","4+","5+","5+","5+","4+","4+","6+","7+","5+","5+","6+");
+var maxRank = new Array(6,6,6,0,6,6,6,0,6,6,0,5,6,0,5,0,0,6);
+
+var ranksTable = new Array(18);
+ranksTable[crNavy] = new Array("Ensign","Lieutenant","Lt. Commander","Commander","Captain","Admiral");
+ranksTable[crMarines] = new Array("Lieutenant","Captain","Force Commander","Lt. Colonel","Colonel","Brigadier");
+ranksTable[crArmy] = new Array("Lieutenant","Captain","Major","Lt. Colonel","Colonel","General");
+ranksTable[crFlyer] = new Array("Pilot","Flight Leader","Squadron Leader","Staff Major","Group Leader","Air Marshal");
+ranksTable[crSailor] = new Array("Ensign","Lieutenant","Lt. Commander","Commander","Captain","Admiral");
+ranksTable[crLawEnf] = new Array("Corporal","Sergeant","Lieutenant","Detective","Chief","Commisioner");
+ranksTable[crDiplomat] = new Array("3rd Secretary","2nd Secretary","1st Secretary","Counselor","Minister","Ambassador");
+ranksTable[crBureaucrat] = new Array("Clerk","Supervisor","Asst. Manager","Manager","Executive","Director");
+ranksTable[crNoble] = new Array("Knight","Baron","Marquis","Count","Duke","-");
+ranksTable[crMerchant] = new Array("4th Officer","3rd Officer","2nd Officer","1st Officer","Captain","Owner");
+ranksTable[crPirate] = new Array("Henchman","Corporal","Sergeant","Lieutenant","Leader","-");
+ranksTable[crBarbarian] = new Array("Brave","Warrior","Leader","Chieftain","Chief","Elder");
+
+var bnLowPsg=0;
+var bnMidPsg=1;
+var bnHighPsg=2;
+var bn1Int=3;
+var bn2Int=4;
+var bn1Edu=5;
+var bn2Edu=6;
+var bnWeapon=7;
+var bnTravellers=8;
+var bn1Soc=9;
+var bn2Soc=10;
+var bnScoutShip=11;
+var bnForensicKit=12;
+var bnInstrument=13;
+var bnWatch=14;
+var bnLabShip=15;
+var bnYacht=16;
+var bnTrader=17;
+var bnSeeker=18;
+var bnLetter=19;
+var bnLoseSoc=20;
+var bnCorsair=21;
+var bnSafariShip=22;
+var bnNone=23;
+var benefitName = new Array("Low Passage","Middle Passage","High Passage","+1 Int","+2 Int","+1 Edu","+2 Edu","Weapon","Traveller's","+1 Soc","+2 Soc","Scout Ship","Forensic Kit","Instrument","Watch","Lab Ship","Yacht","Trader","Seeker","Letter","-1 Soc","Corsair","Safari Ship","-");
+var benefitCount = new Array(24);
+
+var benefitsTable = new Array(18);
+benefitsTable[crNavy]= new Array(bnLowPsg,bn1Int,bn2Edu,bnWeapon,bnTravellers,bnHighPsg,bn2Soc);
+benefitsTable[crMarines]= new Array(bnLowPsg,bn2Int,bn1Edu,bnWeapon,bnTravellers,bnHighPsg,bn2Soc);
+benefitsTable[crArmy]= new Array(bnLowPsg,bn1Int,bn2Edu,bnWeapon,bnHighPsg,bnMidPsg,bn1Soc);
+benefitsTable[crScout]= new Array(bnLowPsg,bn2Int,bn2Edu,bnWeapon,bnWeapon,bnScoutShip,bnNone);
+benefitsTable[crFlyer]= new Array(bnLowPsg,bn1Edu,bnWeapon,bnWeapon,bnHighPsg,bnMidPsg,bn1Soc);
+benefitsTable[crSailor]= new Array(bnLowPsg,bn1Int,bn1Edu,bnWeapon,bn1Soc,bnHighPsg,bnTravellers);
+benefitsTable[crLawEnf]= new Array(bnLowPsg,bn1Int,bnForensicKit,bnWeapon,bnHighPsg,bn1Soc,bnTravellers);
+benefitsTable[crDoctor]= new Array(bnLowPsg,bn1Edu,bn1Edu,bnWeapon,bnInstrument,bnMidPsg,bnNone);
+benefitsTable[crDiplomat]= new Array(bnLowPsg,bn1Int,bn2Edu,bnWeapon,bn1Soc,bnHighPsg,bnTravellers);
+benefitsTable[crBureaucrat]= new Array(bnLowPsg,bnMidPsg,bnNone,bnWatch,bnNone,bnHighPsg,bn1Soc);
+benefitsTable[crScientist]= new Array(bnLowPsg,bnMidPsg,bnHighPsg,bn1Soc,bnWeapon,bnLabShip,bnNone);
+benefitsTable[crNoble]= new Array(bnLowPsg,bnHighPsg,bnWeapon,bnWeapon,bnTravellers,bnYacht,bnNone);
+benefitsTable[crMerchant]= new Array(bnLowPsg,bn1Int,bn2Edu,bnWeapon,bnWeapon,bnLowPsg,bnTrader);
+benefitsTable[crBelter]= new Array(bnLowPsg,bn1Int,bnWeapon,bnHighPsg,bnTravellers,bnSeeker,bnNone);
+benefitsTable[crPirate]= new Array(bnLowPsg,bn1Int,bnWeapon,bnLetter,bnLoseSoc,bnMidPsg,bnCorsair);
+benefitsTable[crRogue]= new Array(bnLowPsg,bn1Soc,bnWeapon,bnWeapon,bnHighPsg,bnTravellers,bnNone);
+benefitsTable[crHunter]= new Array(bnLowPsg,bnHighPsg,bnWeapon,bnWeapon,bnWeapon,bnSafariShip,bnNone);
+benefitsTable[crBarbarian]= new Array(bnLowPsg,bnWeapon,bnWeapon,bnWeapon,bnNone,bnHighPsg,bnHighPsg);
+
+var cashTable = new Array(18);
+cashTable[crNavy] = new Array(1000,5000,5000,10000,20000,50000,50000);
+cashTable[crMarines] = new Array(2000,5000,5000,10000,20000,30000,40000);
+cashTable[crArmy] = new Array(2000,5000,10000,10000,10000,20000,30000);
+cashTable[crScout] = new Array(20000,20000,30000,30000,50000,50000,50000);
+cashTable[crFlyer] = new Array(2000,5000,10000,10000,10000,20000,30000);
+cashTable[crSailor] = new Array(2000,5000,10000,10000,10000,20000,30000);
+cashTable[crLawEnf] = new Array(1000,2000,5000,7500,10000,25000,50000);
+cashTable[crDoctor] = new Array(20000,20000,20000,30000,40000,60000,100000);
+cashTable[crDiplomat] = new Array(2000,5000,10000,10000,10000,20000,30000);
+cashTable[crBureaucrat] = new Array(0,0,10000,10000,40000,40000,80000);
+cashTable[crScientist] = new Array(1000,2000,5000,10000,20000,30000,40000);
+cashTable[crNoble] = new Array(10000,10000,50000,50000,100000,100000,200000);
+cashTable[crMerchant] = new Array(1000,5000,10000,10000,10000,20000,50000);
+cashTable[crBelter] = new Array(0,0,1000,10000,100000,100000,100000);
+cashTable[crPirate] = new Array(0,0,1000,10000,50000,50000,50000);
+cashTable[crRogue] = new Array(0,0,10000,10000,50000,100000,100000);
+cashTable[crHunter] = new Array(1000,1000,5000,5000,10000,100000,100000);
+cashTable[crBarbarian] = new Array(0,0,1000,2000,3000,4000,5000);
+
+var skillTables = new Array(18);
+skillTables[crNavy] = new Array(4);
+skillTables[crNavy][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skMental,skIncreaseSocial);
+skillTables[crNavy][1] = new Array(skShipsBoat,skVaccSuit,skForwardObserver,skSpaceCombat,skHandCombat,skGunCombat);
+skillTables[crNavy][2] = new Array(skVaccSuit,skMechanical,skElectronics,skSpace,skSpaceCombat,skInborn);
+skillTables[crNavy][3] = new Array(skMedical,skNavigation,skSpaceTech,skTechnical,skSpace,skInterpersonal);
+skillTables[crMarines] = new Array(4);
+skillTables[crMarines][0] = new Array(skPhysical,skIncreaseDexterity,skPhysical,skVice,skHandCombat,skBladeCombat);
+skillTables[crMarines][1] = new Array(skATV,skVaccSuit,skBladeCombat,skSpecialCombat,skHandCombat,skGunCombat);
+skillTables[crMarines][2] = new Array(skVehicle,skMechanical,skElectronics,skTactics,skHandCombat,skSpecialCombat);
+skillTables[crMarines][3] = new Array(skMedical,skTactics,skTactics,skTechnical,skInborn,skInterpersonal);
+skillTables[crArmy] = new Array(4);
+skillTables[crArmy][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skIncreaseEducation,skHandCombat);
+skillTables[crArmy][1] = new Array(skATV,skGravVehicle,skGunCombat,skSpecialCombat,skHandCombat,skGunCombat);
+skillTables[crArmy][2] = new Array(skVehicle,skMechanical,skElectronics,skTactics,skBladeCombat,skGunCombat);
+skillTables[crArmy][3] = new Array(skMedical,skTactics,skTactics,skTechnical,skInborn,skInterpersonal);
+skillTables[crScout] = new Array(4);
+skillTables[crScout][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skMental,skGunCombat);
+skillTables[crScout][1] = new Array(skGravVehicle,skVaccSuit,skMechanical,skSpace,skElectronics,skInborn);
+skillTables[crScout][2] = new Array(skVehicle,skMechanical,skElectronics,skInborn,skSpecialCombat,skMedical);
+skillTables[crScout][3] = new Array(skMedical,skSpace,skSpaceTech,skTechnical,skInborn,skInterpersonal);
+skillTables[crFlyer] = new Array(4);
+skillTables[crFlyer][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skBrawling,skInborn);
+skillTables[crFlyer][1] = new Array(skHandCombat,skVaccSuit,skGunCombat,skVehicle,skVehicle,skVehicle);
+skillTables[crFlyer][2] = new Array(skAircraft,skMechanical,skElectronics,skGravitics,skGunCombat,skSurvival);
+skillTables[crFlyer][3] = new Array(skMedical,skInborn,skSpace,skTechnical,skInborn,skInterpersonal);
+skillTables[crSailor] = new Array(4);
+skillTables[crSailor][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skBrawling,skInborn);
+skillTables[crSailor][1] = new Array(skGunCombat,skCommunications,skForwardObserver,skVehicle,skSmallWatercraft,skSpecialCombat);
+skillTables[crSailor][2] = new Array(skLargeWatercraft,skMechanical,skElectronics,skGravitics,skNavigation,skDemolitions);
+skillTables[crSailor][3] = new Array(skMedical,skVehicle,skVice,skTechnical,skInborn,skInterpersonal);
+skillTables[crLawEnf] = new Array(4);
+skillTables[crLawEnf][0] = new Array(skPhysical,skIncreaseDexterity,skMental,skHandCombat,skVice,skGambling);
+skillTables[crLawEnf][1] = new Array(skStreetwise,skVehicle,skInborn,skHandCombat,skBladeCombat,skGunCombat);
+skillTables[crLawEnf][2] = new Array(skVice,skForensic,skEnviron,skTactics,skTechnical,skInterrogation);
+skillTables[crLawEnf][3] = new Array(skLegal,skInborn,skEconomic,skInterview,skForensic,skInterpersonal);
+skillTables[crDoctor] = new Array(4);
+skillTables[crDoctor][0] = new Array(skIncreaseStrength,skIncreaseDexterity,skIncreaseEndurance,skMental,skIncreaseEducation,skIncreaseSocial);
+skillTables[crDoctor][1] = new Array(skIncreaseDexterity,skTechnical,skMedical,skVice,skMedical,skBladeCombat);
+skillTables[crDoctor][2] = new Array(skMedical,skMedical,skMechanical,skElectronics,skTechnical,skAcademic);
+skillTables[crDoctor][3] = new Array(skMedical,skScience,skInterpersonal,skTechnical,skMental,skAcademic);
+skillTables[crDiplomat] = new Array(4);
+skillTables[crDiplomat][0] = new Array(skPhysical,skIncreaseEducation,skMental,skBladeCombat,skGunCombat,skInborn);
+skillTables[crDiplomat][1] = new Array(skMental,skVaccSuit,skVehicle,skVehicle,skVice,skComputer);
+skillTables[crDiplomat][2] = new Array(skVice,skStreetwise,skInterrogation,skRecruiting,skInborn,skEconomic);
+skillTables[crDiplomat][3] = new Array(skLiaison,skInterpersonal,skAcademic,skTechnical,skInborn,skIncreaseSocial);
+skillTables[crBureaucrat] = new Array(4);
+skillTables[crBureaucrat][0] = new Array(skIncreaseEndurance,skIncreaseEducation,skMental,skBrawling,skIncreaseDexterity,skInborn);
+skillTables[crBureaucrat][1] = new Array(skGunCombat,skVehicle,skHandCombat,skInborn,skVehicle,skIncreaseEducation);
+skillTables[crBureaucrat][2] = new Array(skRecruiting,skVehicle,skLiaison,skInterrogation,skInterpersonal,skEconomic);
+skillTables[crBureaucrat][3] = new Array(skEconomic,skAcademic,skComputer,skAdmin,skInborn,skLeader);
+skillTables[crScientist] = new Array(4);
+skillTables[crScientist][0] = new Array(skIncreaseStrength,skIncreaseDexterity,skIncreaseEndurance,skMental,skInterpersonal,skInborn);
+skillTables[crScientist][1] = new Array(skGunCombat,skHandCombat,skInborn,skVehicle,skSpaceTech,skEnviron);
+skillTables[crScientist][2] = new Array(skMechanical,skElectronics,skTechnical,skTechnical,skAcademic,skAcademic);
+skillTables[crScientist][3] = new Array(skScience,skScience,skAcademic,skInborn,skMental,skAcademic);
+skillTables[crNoble] = new Array(4);
+skillTables[crNoble][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skMental,skVice,skHandCombat);
+skillTables[crNoble][1] = new Array(skGunCombat,skHandCombat,skEnviron,skVehicle,skVice,skIncreaseDexterity);
+skillTables[crNoble][2] = new Array(skSpace,skShipsBoat,skVehicle,skNavigation,skSpaceTech,skLeader);
+skillTables[crNoble][3] = new Array(skScience,skTechnical,skAcademic,skInterpersonal,skInborn,skInborn);
+skillTables[crMerchant] = new Array(4);
+skillTables[crMerchant][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skHandCombat,skBladeCombat,skVice);
+skillTables[crMerchant][1] = new Array(skVehicle,skVaccSuit,skInborn,skInterpersonal,skTechnical,skGunCombat);
+skillTables[crMerchant][2] = new Array(skStreetwise,skMechanical,skElectronics,skSpace,skSpaceCombat,skAcademic);
+skillTables[crMerchant][3] = new Array(skMedical,skSpace,skSpaceTech,skTechnical,skExploratory,skEconomic);
+skillTables[crBelter] = new Array(4);
+skillTables[crBelter][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skHandCombat,skVaccSuit);
+skillTables[crBelter][1] = new Array(skSpace,skZeroGEnviron,skGunCombat,skProspecting,skProspecting,skSpace);
+skillTables[crBelter][2] = new Array(skShipsBoat,skMechanical,skElectronics,skProspecting,skExploratory,skSpace);
+skillTables[crBelter][3] = new Array(skMedical,skSpace,skSpaceTech,skTechnical,skInborn,skSpaceTech);
+skillTables[crPirate] = new Array(4);
+skillTables[crPirate][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skHandCombat,skBladeCombat);
+skillTables[crPirate][1] = new Array(skSpace,skZeroGEnviron,skGunCombat,skSpecialCombat,skBladeCombat,skGunCombat);
+skillTables[crPirate][2] = new Array(skVice,skMechanical,skGunnery,skShipsTactics,skTactics,skSpace);
+skillTables[crPirate][3] = new Array(skPilot,skSpace,skVice,skTechnical,skInborn,skElectronics);
+skillTables[crRogue] = new Array(4);
+skillTables[crRogue][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skVice,skHandCombat,skCarousing);
+skillTables[crRogue][1] = new Array(skHandCombat,skGunCombat,skDemolitions,skVehicle,skIncreaseEducation,skVehicle);
+skillTables[crRogue][2] = new Array(skVice,skVice,skStreetwise,skInborn,skInterpersonal,skTactics);
+skillTables[crRogue][3] = new Array(skMedical,skVice,skVice,skTechnical,skInborn,skInborn);
+skillTables[crHunter] = new Array(4);
+skillTables[crHunter][0] = new Array(skPhysical,skIncreaseDexterity,skIncreaseEndurance,skMental,skGunCombat,skBladeCombat);
+skillTables[crHunter][1] = new Array(skHandCombat,skGunCombat,skEnviron,skEnviron,skHunting,skVehicle);
+skillTables[crHunter][2] = new Array(skElectronics,skMechanical,skTechnical,skComputer,skEnviron,skEconomic);
+skillTables[crHunter][3] = new Array(skMedical,skTechnical,skHunting,skExploratory,skInborn,skAcademic);
+skillTables[crBarbarian] = new Array(4);
+skillTables[crBarbarian][0] = new Array(skPhysical,skIncreaseDexterity,skPhysical,skVice,skPhysical,skHandCombat);
+skillTables[crBarbarian][1] = new Array(skHandCombat,skHandCombat,skBladeCombat,skEnviron,skArchaicWeapons,skGunCombat);
+skillTables[crBarbarian][2] = new Array(skHandCombat,skMechanical,skEnviron,skEnviron,skVice,skArchaicWeapons);
+skillTables[crBarbarian][3] = new Array(skMedical,skInterrogation,skTactics,skEnviron,skInborn,skInborn);
+
+var careerAvailable = new Array(18);
+for ( i=0; i<18; i++ ) careerAvailable[i]=1;
+
+function changeGenDice(newValue)
+{
+  statMethod = newValue;
+}
+
+function setDivText(divid,text)
+{
+	document.getElementById(divid).innerHTML = text;
+}
+
+function getElement(divid)
+{
+	var returnval = document.getElementById(divid)
+	return returnval
+}
+
+function setSkill(skill,newValue)
+{
+  if (skillCascade[skill]>0 ) 
+  {
+    cascadeQueue[cascadeQueueCount]=skill;
+    cascadeQueueCount = cascadeQueueCount + 1;
+  }
+  else
+  {
+    skillValue[skill]=newValue;
+    if ( newValue > maxSkill ) maxSkill = newValue;
+    displaySkills();
+  }
+}
+
+function setExperience()
+{
+  Experience = UPPval[stIntelligence] + UPPval[stEducation];
+}
+
+function displayUPP()
+{
+  UPPtext = "";
+  for ( i=stStrength; i<=stSocial; i++ ) UPPtext=UPPtext + UPP[i];
+  setDivText("summ1",UPPtext);
+}
+
+function currentImpliedSkill(skill)
+{
+  impliedSkillLevel=-1;
+  if ( skillValue[skill] > impliedSkillLevel ) impliedSkillLevel=skillValue[skill];
+  if ( skillSameLevelImpliedByCount[skill] > 0 )
+  {
+    if ( skillSameLevelImpliedByCount[skill] == 1 )
+    {
+      if ( skillValue[skillSameLevelImpliedBySkills[skill]] > impliedSkillLevel ) impliedSkillLevel = skillValue[skillSameLevelImpliedBySkills[skill]];
+    }
+    else
+    {
+      for ( i=0; i<skillSameLevelImpliedByCount[skill]; i++ )
+      {
+        if ( skillValue[skillSameLevelImpliedBySkills[skill][i]] > impliedSkillLevel ) impliedSkillLevel = skillValue[skillSameLevelImpliedBySkills[skill][i]];
+      }
+    }
+  }
+  if ( skillLevelLowerImpliedByCount[skill] > 0 )
+  {
+    if ( skillLevelLowerImpliedByCount[skill] == 1 )
+    {
+      if ( (skillValue[skillLevelLowerImpliedBySkills[skill]] - 1) > impliedSkillLevel ) impliedSkillLevel = skillValue[skillLevelLowerImpliedBySkills[skill]] - 1;
+    }
+    else
+    {
+      for ( i=0; i<skillLevelLowerImpliedByCount[skill]; i++ )
+      {
+        if ( (skillValue[skillLevelLowerImpliedBySkills[skill][i]] - 1) > impliedSkillLevel ) impliedSkillLevel = skillValue[skillLevelLowerImpliedBySkills[skill][i]] - 1;
+      }
+    }
+  }
+  if ( skillOneImpliedByCount[skill]>0 && impliedSkillLevel<1 )
+  {
+    if ( skillOneImpliedByCount[skill] == 1 )
+    {
+      if ( skillValue[skillOneImpliedBySkills[skill]] > 0 ) impliedSkillLevel = 1;
+    }
+    else
+    {
+      for ( i=0; i<skillOneImpliedByCount[skill]; i++ )
+      {
+        if ( skillValue[skillOneImpliedBySkills[skill][i]] > 0 ) impliedSkillLevel = 1;
+      }  
+    }
+  }
+  if ( skillZeroImpliedByCount[skill]>0 && impliedSkillLevel<0 )
+  {
+    if ( skillZeroImpliedByCount[skill] == 1 )
+    {
+      if ( skillValue[skillZeroImpliedBySkills[skill]] > 0 ) impliedSkillLevel = 0;
+    }
+    else
+    {
+      for ( i=0; i<skillZeroImpliedByCount[skill]; i++ )
+      {
+        if ( skillValue[skillZeroImpliedBySkills[skill][i]] > 0 ) impliedSkillLevel = 0;
+      }  
+    }
+  }
+  
+  return impliedSkillLevel;
+}
+
+function increaseSkill(skill)
+{
+  if ( skill >= skIncreaseStrength )
+  {
+    if ( skill == skIncreaseStrength ) chosenStat=stStrength;
+    else if ( skill == skIncreaseDexterity ) chosenStat=stDexterity;
+    else if ( skill == skIncreaseEndurance ) chosenStat=stEndurance;
+    else if ( skill == skIncreaseIntelligence ) chosenStat=stIntelligence;
+    else if ( skill == skIncreaseEducation ) chosenStat=stEducation;
+    else if ( skill == skIncreaseSocial ) chosenStat=stSocial;
+  
+    histText=" "+skillName[skill]+"<br>";
+    updateHistory(histText);
+        
+    UPPval[chosenStat] = UPPval[chosenStat]+1;
+    if ( UPPval[chosenStat]>15 ) UPPval[chosenStat]=15;
+    UPP[chosenStat] = statToHex(UPPval[chosenStat]);
+    displayUPP();
+  }
+  else
+  {
+    if (skillCascade[skill]>0 ) 
+    {
+      cascadeQueue[cascadeQueueCount]=skill;
+      cascadeQueueCount = cascadeQueueCount + 1;
+    }
+    else
+    {
+      oldValue = currentImpliedSkill(skill);
+      if ( oldValue < 1 ) newValue=1;
+      else newValue=oldValue+1;
+      skillValue[skill] = newValue;
+      if ( newValue > maxSkill ) maxSkill = newValue;
+      
+      histText=" "+skillName[skill]+"-"+newValue+"<br>";
+      updateHistory(histText);
+    }
+  }
+  displaySkills();
+}
+
+function manageCascadeQueue(skill)
+{
+  if ( cascadeQueueCount>0 )
+  {
+    if ( cascadeQueuePrompt == "" )
+    {
+      // Starting a new skill
+      cascadeQueuePrompt = "You have received cascade skill " + skillName[cascadeQueue[0]];  
+      input22text = cascadeQueuePrompt + ". Please select: <select onchange=\"javascript:manageCascadeQueue(this.value);\">";
+      input22text = input22text + "<option value=none>Choose...</option>";
+      for ( i=0; i<skillCascade[cascadeQueue[0]]; i++ )
+      {
+        input22text = input22text + "<option value=" + skillCascSkills[cascadeQueue[0]][i] +">" + skillName[skillCascSkills[cascadeQueue[0]][i]] + "</option>";
+      }
+      input22text = input22text + "</select>";
+      setDivText("input22",input22text);
+    }
+    else if ( skillCascade[skill]>0 )
+    {
+      // Inside a cascade and have encountered another level of cascading
+      cascadeQueuePrompt = cascadeQueuePrompt + "::" + skillName[skill];
+      cascadeQueue[0] = skill;
+      input22text = cascadeQueuePrompt + ". Please select: <select onchange=\"javascript:manageCascadeQueue(this.value);\">";
+      input22text = input22text + "<option value=none>Choose...</option>";
+      for ( i=0; i<skillCascade[cascadeQueue[0]]; i++ )
+      {
+        input22text = input22text + "<option value=" + skillCascSkills[cascadeQueue[0]][i] +">" + skillName[skillCascSkills[cascadeQueue[0]][i]] + "</option>";
+      }
+      input22text = input22text + "</select>";
+      setDivText("input22",input22text);
+    }
+    else
+    {
+      // Have reached the bottom of a cascade
+      if ( Terms==0 && cascadeQueue[0]==skGunCombat ) 
+      {
+        setSkill(skill,0);
+        histText=" "+skillName[skill]+"-0<br>";
+        updateHistory(histText);
+      }
+      else increaseSkill(skill);
+      for ( i=0; i<(cascadeQueueCount - 1); i++ ) cascadeQueue[i]=cascadeQueue[i+1];
+      cascadeQueue[cascadeQueueCount]="";
+      cascadeQueueCount = cascadeQueueCount - 1;
+      cascadeQueuePrompt = "";
+
+      setExperience();
+      calcSkillTotal();
+      summ11text=SkillTotal+" / "+Experience;
+      setDivText("summ11",summ11text);
+  
+      if ( SkillTotal>Experience ) 
+      {
+        input22text = "Your total skill level of "+SkillTotal+" is greater than Experience maximum of "+Experience+". ";
+        input22text = input22text + "Click <a href=\"javascript:removeSkill('cascade');\">here</a> to remove a skill.";
+        setDivText("input22",input22text);      
+      }
+      else
+      {
+        setDivText("input22","");
+        manageCascadeQueue("");
+      }
+    }
+  }
+  else
+  {
+    if ( Terms == 0 ) doNextTerm();
+    else if ( skillsToAdd == 0 ) completeTerm();
+    else addNextSkill();
+  }
+}
+
+function calcSkillTotal()
+{
+  tmpCount=0;
+  for ( i=0; i<164; i++ )
+  {
+    if ( skillValue[i]>0 ) tmpCount=tmpCount + skillValue[i];
+  }
+  SkillTotal=tmpCount;
+}
+
+function removeSkill(CalledFrom)
+{
+  input22text="Choose skill to reduce<br> ";
+  for ( sk=0; sk<164; sk++ )
+  {
+    if ( skillValue[sk]>0 )
+    {
+      input22text = input22text + "<a href=\"javascript:lowerSkill("+sk+",'"+CalledFrom+"');\">"+skillName[sk]+"</a>&nbsp; ";
+    }
+  }
+  setDivText("input22",input22text);
+}
+
+function lowerSkill(sk,CalledFrom)
+{
+  if ( skillValue[sk] > 0 ) skillValue[sk] = skillValue[sk] - 1;
+  displaySkills();
+  setExperience();
+  calcSkillTotal();
+  summ11text=SkillTotal+" / "+Experience;
+  setDivText("summ11",summ11text);
+  
+  histText = "Skill reduced due to Experience limit: "+skillName[sk]+"-"+skillValue[sk]+"<br>";
+  updateHistory(histText);
+  
+  if ( SkillTotal > Experience ) removeSkill(CalledFrom);
+  else if ( CalledFrom == 'cascade' ) manageCascadeQueue('');
+  else if ( skillsToAdd>0 ) addNextSkill();
+  else completeTerm();
+}
+
+function displaySkills()
+{
+  outputText="";
+  foundAny=0;
+  for ( i=maxSkill; i>=0; i-- )
+  {
+    for ( j=0; j<164; j++ )
+    {
+      if ( skillValue[j] == i )
+      {
+        if ( foundAny == 1 )
+        {
+          outputText = outputText + ", ";
+        }
+        foundAny=1;
+        outputText=outputText + skillName[j] + "-" + i;
+      }
+    }
+  }
+  setDivText("summ7",outputText);
+}
+
+function rollDice(numDice)
+{
+  total=0;
+  for ( i=1; i<=numDice; i++ )
+  {
+    total = total + (Math.floor((Math.random()*6)+1));
+  }
+  return total;
+}
+
+function rollStat()
+{
+  statVal = rollDice(2);  // Default (statMethod should be '2d6')
+  if ( statMethod == '3d6t12' )
+  {
+    dice1 = rollDice(1); dice2 = rollDice(1); dice3 = rollDice(1);
+    statVal = dice1 + dice2 + dice3 - Math.min(dice1,dice2,dice3);
+  }
+  if ( statMethod == '4d6t13' )
+  {
+    var dice = new Array(4);  
+    dice[0] = rollDice(1); dice[1] = rollDice(1); 
+    dice[2] = rollDice(1); dice[3] = rollDice(1); 
+    dice.sort();
+    statVal = dice[1] + dice[3];
+  }
+  return statVal;
+}
+
+function statToHex(stat)
+{
+  if ( stat < 10 ) hexval = stat;
+  else if ( stat==10 ) hexval='A';
+  else if ( stat==11 ) hexval='B';
+  else if ( stat==12 ) hexval='C';
+  else if ( stat==13 ) hexval='D'; 
+  else if ( stat==14 ) hexval='E'; 
+  else if ( stat==15 ) hexval='F'; 
+  return hexval;
+}
+
+function generateUPP()
+{
+  UPPtext='';
+  for ( j=0; j<6; j++ )
+  {
+    UPPval[j] = rollStat();
+    UPP[j] = new String(statToHex(UPPval[j]));
+    UPPtext = UPPtext + statName[j] + ": " + UPPval[j];
+    if ( j<5 ) UPPtext = UPPtext + ', ';
+  }
+  setDivText("input22",UPPtext);
+  
+  UPPsumm="";
+  for ( j=0; j<6; j++ ) UPPsumm=UPPsumm+UPP[j];
+  setDivText("summ1",UPPsumm);
+  row3text="<a href=\"javascript:acceptStats('"+UPPsumm+"');\">Accept Stats</a>";
+  setDivText("input31",row3text);
+}
+
+function acceptStats(UPPsumm)
+{
+  text="Rolled UPP = "+UPPsumm+"<br>";
+  updateHistory(text);
+  input11text="<a href=\"javascript:generateHomeworld();\">Generate Homeworld</a>"
+  setDivText("input11",input11text);
+  setDivText("input12","");
+  setDivText("input21","");
+  setDivText("input22","");
+  setDivText("input31","");
+}
+
+function generateHomeworld()
+{
+  for ( i=0; i<164; i++ ) skillValue[i]=-1;
+  maxSkill=0;
+  for ( i=0; i<18; i++ ) careerAvailable[i]=1;
+  
+  tmpChargenHistory="";
+
+  randNum = rollDice(2);
+  if ( randNum<7 ) homeWorld[hwStarport]="A";
+  else if ( randNum<10 ) homeWorld[hwStarport]="B";
+  else if ( randNum<12 ) homeWorld[hwStarport]="C";
+  else
+  {
+    randNum = rollDice(1);
+    if ( randNum<4 ) homeWorld[hwStarport]="D";
+    else if ( randNum<6 ) homeWorld[hwStarport]="E";
+    else homeWorld[hwStarport]="F";
+  }
+
+  randNum = rollDice(2);
+  if ( randNum==2 ) homeWorld[hwSize]="Asteroid";
+  else if ( randNum<7 ) homeWorld[hwSize]="Small";
+  else if ( randNum<10 ) homeWorld[hwSize]="Medium";
+  else homeWorld[hwSize]="Large";
+
+  randNum = rollDice(2);
+  if ( homeWorld[hwSize]=="Asteroid" ) randNum=randNum - 9;
+  else if ( homeWorld[hwSize]=="Small" ) randNum=randNum - 2;
+  else if ( homeWorld[hwSize]=="Large" ) randNum=randNum + 2;
+  if ( randNum<4 ) homeWorld[hwAtmosphere]="Vacuum";
+  else if ( randNum<6 ) homeWorld[hwAtmosphere]="Thin";
+  else if ( randNum<9 ) homeWorld[hwAtmosphere]="Standard";
+  else if ( randNum<11 ) homeWorld[hwAtmosphere]="Dense";
+  else homeWorld[hwAtmosphere]="Exotic";
+  if ( randNum<4 )
+  {
+    careerAvailable[crFlyer]=0;
+    careerAvailable[crHunter]=0;
+  }
+
+  randNum = rollDice(2);
+  if ( homeWorld[hwSize]=="Small" ) randNum=randNum - 2;
+  else if ( homeWorld[hwSize]=="Large" ) randNum=randNum + 2;
+  if ( randNum<4 ) homeWorld[hwHydrosphere]="Desert";
+  else if ( randNum<6 ) homeWorld[hwHydrosphere]="Dry";
+  else if ( randNum<12 ) homeWorld[hwHydrosphere]="Wet";
+  else homeWorld[hwHydrosphere]="Water";
+  if ( randNum<6 ) careerAvailable[crSailor]=0;
+
+  randNum = rollDice(2);
+  if ( randNum<4 ) homeWorld[hwPopulation]="Low";
+  else if ( randNum<8 ) homeWorld[hwPopulation]="Med";
+  else homeWorld[hwPopulation]="High";
+  if ( randNum<4 ) 
+  {
+    careerAvailable[crFlyer]=0;
+    careerAvailable[crBureaucrat]=0;
+  }
+
+  randNum = rollDice(2);
+  if ( homeWorld[hwPopulation]=="Low" ) randNum=randNum - 1;
+  else if ( homeWorld[hwPopulation]=="High" ) randNum=randNum + 1;
+  if ( randNum<3 ) homeWorld[hwLawCode]="No Law";
+  else if ( randNum<5 ) homeWorld[hwLawCode]="Low";
+  else if ( randNum<10 ) homeWorld[hwLawCode]="Moderate";
+  else if ( randNum<12 ) homeWorld[hwLawCode]="High";
+  else homeWorld[hwLawCode]="Extreme";
+  if ( randNum<3 ) 
+  {
+    careerAvailable[crDiplomat]=0;
+    careerAvailable[crBureaucrat]=0;
+  }
+
+  randNum = rollDice(2);
+  if ( homeWorld[hwStarport]=="A" ) randNum=randNum + 3;
+  else if ( homeWorld[hwStarport]=="B" ) randNum=randNum + 2;
+  else if ( homeWorld[hwStarport]=="C" ) randNum=randNum + 1;
+  else if ( homeWorld[hwStarport]=="X" ) randNum=randNum - 2;
+  if ( homeWorld[hwSize]=="Asteroid" ) randNum=randNum + 1;
+  if ( homeWorld[hwHydrosphere]=="Water" ) randNum=randNum + 1;
+  if ( homeWorld[hwPopulation]=="Low" ) randNum=randNum + 1;
+  else if ( homeWorld[hwPopulation]=="High" ) randNum=randNum + 2;
+  if ( randNum<3 ) homeWorld[hwTechCode]="Pre-Industrial";
+  else if ( randNum<5 ) homeWorld[hwTechCode]="Industrial";
+  else if ( randNum<7 ) homeWorld[hwTechCode]="Pre-Stellar";
+  else if ( randNum<9 ) homeWorld[hwTechCode]="Early Stellar";
+  else if ( randNum<11 ) homeWorld[hwTechCode]="Average Stellar";
+  else homeWorld[hwTechCode]="High Stellar";
+  if ( randNum>=7 ) 
+  {
+    setSkill(skComputer,0);
+    tmpChargenHistory=tmpChargenHistory + "homeworld skill: " + skillName[skComputer] + "-0<br>";
+  }
+  if ( randNum>=3 && randNum<9 ) 
+  {
+    setSkill(skWheeledVehicle,0);
+    tmpChargenHistory=tmpChargenHistory + "homeworld skill: " + skillName[skWheeledVehicle] + "-0<br>";
+  }
+  if ( randNum>=9 ) 
+  {
+    setSkill(skGravVehicle,0);
+    tmpChargenHistory=tmpChargenHistory + "homeworld skill: " + skillName[skGravVehicle] + "-0<br>";
+  }
+  if ( randNum<5 ) 
+  {
+    careerAvailable[crArmy]=0;
+    careerAvailable[crMarines]=0;
+    careerAvailable[crNavy]=0;
+    careerAvailable[crScientist]=0;
+    careerAvailable[crNoble]=0;
+  }
+  if ( randNum<7 ) 
+  {
+    careerAvailable[crScout]=0;
+    careerAvailable[crMerchant]=0;
+    careerAvailable[crBelter]=0;
+    careerAvailable[crPirate]=0;
+  }
+  if ( randNum<3 ) 
+  {
+    careerAvailable[crFlyer]=0;
+    careerAvailable[crLawEnf]=0;
+    careerAvailable[crDoctor]=0;
+    careerAvailable[crDiplomat]=0;
+    careerAvailable[crRogue]=0;
+  }
+  if ( randNum>=3 ) careerAvailable[crBarbarian]=0;
+
+  if ( UPPval[stSocial]<10 ) careerAvailable[crNoble]=0;
+  
+  availText = "Available Careers: ";
+  foundAny=0;
+  for ( i=0; i<18; i++ )
+  {
+    if ( careerAvailable[i]==1 )
+    {
+      if ( foundAny == 9 ) availText = availText + ",<br>";    
+      else if ( foundAny > 0 ) availText = availText + ", ";
+      foundAny=foundAny+1;
+      availText=availText + careerName[i];
+    }
+  }
+  
+  input12text="StarPort="+homeWorld[hwStarport]+", Size="+homeWorld[hwSize];
+  input12text=input12text+", Atmos="+homeWorld[hwAtmosphere];
+  input12text=input12text+", Hydro="+homeWorld[hwHydrosphere];
+  input22text="Population="+homeWorld[hwPopulation]+", Law="+homeWorld[hwLawCode];
+  input22text=input22text+", Tech="+homeWorld[hwTechCode];
+  input31text="<a href=\"javascript:acceptHomeWorld();\">Accept Homeworld</a>";
+  setDivText("input12",input12text);
+  setDivText("input22",input22text);
+  setDivText("summ2",input12text+"<BR>"+input22text);
+  setDivText("input31",input31text);
+  setDivText("input32",availText);
+  
+}
+
+function calculateRollsNeeded(career)
+{
+  baseValue=enlistment[career].substr(0,enlistment[career].length - 1);
+  dm1Value=enlistmentDM1value[career].substr(0,enlistmentDM1value[career].length - 1);
+  dm1PlusMinus=enlistmentDM1value[career].substr(enlistmentDM1value[career].length - 1,1);
+  if ( (dm1PlusMinus=="+" && UPPval[enlistmentDM1skill[career]]>=dm1Value) || (dm1PlusMinus=="-" && UPPval[enlistmentDM1skill[career]]<=dm1Value) )
+  {
+    baseValue = baseValue - 1;
+  }
+  dm2Value=enlistmentDM2value[career].substr(0,enlistmentDM2value[career].length - 1);
+  dm2PlusMinus=enlistmentDM2value[career].substr(enlistmentDM2value[career].length - 1,1);
+  if ( (dm2PlusMinus=="+" && UPPval[enlistmentDM2skill[career]]>=dm2Value) || (dm2PlusMinus=="-" && UPPval[enlistmentDM2skill[career]]<=dm2Value) )
+  {
+    baseValue = baseValue - 2;
+  }
+  enlistmentRollNeeded[career] = baseValue;  
+
+  baseValue=survival[career].substr(0,survival[career].length - 1);
+  if ( survivalDMskill[career] == 'terms' )
+  {
+    if ( Terms > 0 ) baseValue = baseValue - Terms;
+    else baseValue = baseValue - 1;
+  }
+  else
+  {
+    dmValue=survivalDMvalue[career].substr(0,survivalDMvalue[career].length - 1);
+    dmPlusMinus=survivalDMvalue[career].substr(survivalDMvalue[career].length - 1,1);
+    if ( (dmPlusMinus=="+" && UPPval[survivalDMskill[career]]>=dmValue) || (dmPlusMinus=="-" && UPPval[survivalDMskill[career]]<=dmValue) )
+    {
+      baseValue = baseValue - 2;
+    }
+  }
+  survivalRollNeeded[career] = baseValue;  
+
+  baseValue=commission[career].substr(0,commission[career].length - 1);
+  if ( baseValue != "" )
+  {
+    dmValue=commissionDMvalue[career].substr(0,commissionDMvalue[career].length - 1);
+    dmPlusMinus=commissionDMvalue[career].substr(commissionDMvalue[career].length - 1,1);
+    if ( (dmPlusMinus=="+" && UPPval[commissionDMskill[career]]>=dmValue) || (dmPlusMinus=="-" && UPPval[commissionDMskill[career]]<=dmValue) )
+    {
+      baseValue = baseValue - 1;
+    }
+  }
+  else baseValue=-1;
+  commissionRollNeeded[career] = baseValue;
+
+  baseValue=promotion[career].substr(0,promotion[career].length - 1);
+  if ( baseValue != "" )
+  {
+    dmValue=promotionDMvalue[career].substr(0,promotionDMvalue[career].length - 1);
+    dmPlusMinus=promotionDMvalue[career].substr(promotionDMvalue[career].length - 1,1);
+    if ( (dmPlusMinus=="+" && UPPval[promotionDMskill[career]]>=dmValue) || (dmPlusMinus=="-" && UPPval[promotionDMskill[career]]<=dmValue) )
+    {
+      baseValue = baseValue - 1;
+    }
+  }
+  else baseValue=-1;
+  promotionRollNeeded[career] = baseValue;
+
+  baseValue=specialDuty[career].substr(0,specialDuty[career].length - 1);
+  specialRollNeeded[career] = baseValue - 0;
+  
+  baseValue=reenlist[career].substr(0,reenlist[career].length - 1);
+  reenlistRollNeeded[career] = baseValue - 0;
+  if ( Terms == 7 ) reenlistRollNeeded[career]=12;
+}
+
+function acceptHomeWorld()
+{
+  updateHistory(tmpChargenHistory);
+  
+  input11text="Choose Career: ";
+  for ( i=0; i<18; i++ ) calculateRollsNeeded(i);
+
+  input12text="The numbers in brackets are rolls needed for: enlistment, survival, position, ";
+  input12text=input12text + "promotion, special duty and re-enlistment";
+  input22text="<table><tr>";
+  numCareers=0;
+  for ( i=0; i<18; i++ )
+  {
+    if ( careerAvailable[i]==1 )
+    {
+      numCareers=numCareers+1;
+      if ( numCareers==4 || numCareers==7 || numCareers==10 || numCareers==13 || numCareers==16 ) input22text=input22text + "</tr><tr>";
+      input22text = input22text + "<td><a href=\"javascript:enlistAttempt("+ i +");\">" + careerName[i] + "</a>";
+      input22text = input22text + "(" + enlistmentRollNeeded[i] + "+,";      
+      input22text = input22text + survivalRollNeeded[i] + "+,";
+      if ( commission[i]=='-' ) input22text=input22text + "-,";
+      else input22text = input22text + commissionRollNeeded[i] + "+,";      
+      if ( promotion[i]=='-' ) input22text=input22text + "-,";
+      else input22text = input22text + promotionRollNeeded[i] + "+,";      
+      input22text = input22text + specialRollNeeded[i] + "+,";      
+      input22text = input22text + reenlistRollNeeded[i] + "+)</td>";      
+    }
+  }
+  input22text=input22text +"</tr></table><br><a href=\"javascript:doDraft();\">Submit to Draft</a>";
+     
+  setDivText("input11",input11text);
+  setDivText("input12",input12text);
+  setDivText("input21","");
+  setDivText("input22",input22text);
+  setDivText("input31","");
+  setDivText("input32","");
+}
+
+function enlistAttempt(career)
+{
+  enlistmentRoll = rollDice(2);
+  if ( enlistmentRoll >= enlistmentRollNeeded[career] )
+  {
+    // We're in! Set career and give needed skills
+    histText="Successfully enlisted in "+careerName[career]+" (rolled "+enlistmentRoll+", needed "+enlistmentRollNeeded[career]+")<br>";
+    updateHistory(histText);
+    joinCareer(career);
+  }
+  else
+  {
+    // Failure - give message and allow retry
+    input32text = "Your application was rejected (rolled "+enlistmentRoll+").<br>";
+    input32text = input32text + "The rules state that you must undergo the draft now.<br>";
+    input32text = input32text + "However, this generator will allow fresh attempts.";
+    setDivText("input32",input32text);
+    histText="Failed to enlist in "+careerName[career]+" (rolled "+enlistmentRoll+", needed "+enlistmentRollNeeded[career]+")<br>";
+    updateHistory(histText);
+  }
+}
+
+function doDraft()
+{
+  draftRoll = rollDice(1);
+  histText="Drafted into "+careerName[draftRoll - 1]+"<br>";
+  updateHistory(histText);
+  joinCareer(draftRoll - 1);
+}
+
+function joinCareer(career)
+{
+    Career=career;
+    Rank=0;
+    setDivText("summ5",careerName[Career]);
+    setDivText("summ6","None");
+    input12text = "Congratulations! You have been accepted into the career: "+careerName[Career];
+    setDivText("input11","");
+    setDivText("input12",input12text);
+    setDivText("input21","");
+    setDivText("input22","");
+    setDivText("input31","");
+    setDivText("input32","");
+
+    if ( Career==crNavy || Career==crMarines || career==crFlyer || career==crScout || Career==crMerchant || Career==crPirate )
+    {
+      setSkill(skVaccSuit,0);
+      histText="career skill: "+skillName[skVaccSuit]+"-0<br>";
+      updateHistory(histText);
+    }
+
+    if ( Career==crMarines || Career==crArmy || Career==crScout || Career==crFlyer || Career==crSailor || Career==crLawEnf || Career==crDoctor || Career==crDiplomat || Career==crScientist || Career==crBelter || Career==crPirate || Career==crRogue || Career==crHunter )
+    {
+      histText="career skill:";
+      updateHistory(histText);
+    }    
+
+    if ( Career==crMarines ) increaseSkill(skLargeBlade);
+    if ( Career==crArmy ) increaseSkill(skCombatRifleman);
+    if ( Career==crScout ) increaseSkill(skPilot);
+    if ( Career==crFlyer ) increaseSkill(skAircraft);
+    if ( Career==crSailor ) increaseSkill(skSmallWatercraft);
+    if ( Career==crLawEnf ) increaseSkill(skStreetwise);
+    if ( Career==crDoctor ) increaseSkill(skMedical);
+    if ( Career==crDiplomat ) increaseSkill(skLiaison);
+    if ( Career==crScientist ) increaseSkill(skTechnical);
+    if ( Career==crBelter ) increaseSkill(skVaccSuit);
+    if ( Career==crPirate ) increaseSkill(skBrawling);
+    if ( Career==crRogue ) increaseSkill(skStreetwise);
+    if ( Career==crHunter ) increaseSkill(skHunting);
+
+    histText="career skill:";
+    updateHistory(histText);    
+    if ( Career==crBarbarian ) increaseSkill(skLargeBlade);
+    else setSkill(skGunCombat,0);
+    
+    manageCascadeQueue("");
+}
+
+function doNextTerm()
+{
+  Terms = Terms + 1;
+  setDivText("summ4",Terms);
+  Age = Age + 4;
+  setDivText("summ3",Age);
+  madeSurvivalRoll = 0;
+  madeCommissionRoll = 0;
+  madePromotionRoll = 0;
+  madeSpecialRoll = 0;
+  madeReenlistRoll = 0;
+
+  calculateRollsNeeded(Career);
+  
+  histText="<br>TERM "+Terms+"<br>";
+  updateHistory(histText);
+
+  // Special case - Belter get's ZeroG skill in third term
+  if ( Career == crBelter && Terms == 3 )
+  {
+    histText="career skill:";
+    upgradeHistory(histText);
+    increaseSkill(skZeroGEnviron);
+  }
+
+  survivalRoll = rollDice(2);
+  if ( survivalRoll >= survivalRollNeeded[Career] ) madeSurvivalRoll = 1;
+  
+  if ( commission[Career] != '-' && Rank == 0 && madeSurvivalRoll == 1 )
+  {
+    commissionRoll = rollDice(2);
+    if ( commissionRoll >= (commissionRollNeeded[Career] + 4) ) madeCommissionRoll = 2;
+    else if ( commissionRoll >= commissionRollNeeded[Career] ) madeCommissionRoll = 1;
+  }
+  
+  if ( Rank<maxRank[Career] && (Rank>0 || madeCommissionRoll>0) && madeSurvivalRoll == 1 )
+  {
+    promotionRoll = rollDice(2);
+    if ( promotionRoll >= (promotionRollNeeded[Career] + 4) ) madePromotionRoll = 2;
+    else if ( promotionRoll >= promotionRollNeeded[Career] ) madePromotionRoll = 1;
+  }
+  
+  specialRoll = rollDice(2);
+  if ( specialRoll >= (specialRollNeeded[Career] + 4) ) { madeSpecialRoll = 2; }
+  else if ( specialRoll >= specialRollNeeded[Career] ) madeSpecialRoll = 1;
+
+  if ( madeSurvivalRoll > 0 )
+  {
+    reenlistRoll = rollDice(2);
+    if ( reenlistRoll == 12 ) madeReenlistRoll = 2;
+    else if ( (reenlistRoll >= reenlistRollNeeded[Career]) && (Terms<7) ) madeReenlistRoll = 1;
+  }
+
+  skillsToAdd = numSkills[Career] + madeCommissionRoll + madePromotionRoll + madeSpecialRoll;
+  if ( numSkills[Career]==1 && Terms==1) skillsToAdd = skillsToAdd + 1;
+
+  tmpinput12text = "Survival Roll = " + survivalRoll + " (" + survivalRollNeeded[Career] + " required)";
+  if ( madeSurvivalRoll > 0 ) tmpinput12text = tmpinput12text + "; You survived the term without mishap";
+  else tmpinput12text = tmpinput12text + "; You were injured and will be invalided out";
+  if ( numSkills[Career]==2 || Terms==1 ) tmpinput12text = tmpinput12text + " (2 skills)<br>";
+  else tmpinput12text = tmpinput12text + " (1 skill)<br>";
+  
+  updateHistory(tmpinput12text);
+  input12text=tmpinput12text;
+
+  if ( commission[Career] != '-' && Rank == 0 && madeSurvivalRoll == 1 )
+  {
+    if ( madeCommissionRoll > 0 ) newRankName=implementCommission();
+
+    tmpinput12text = "Commission Roll = " + commissionRoll + " (" + commissionRollNeeded[Career] + " required)";
+    if ( madeCommissionRoll == 2 ) tmpinput12text = tmpinput12text + "; You received a Commission to become a " + newRankName + " (2 bonus skills)<br>";
+    else if ( madeCommissionRoll == 1 ) tmpinput12text = tmpinput12text + "; You received a Commission to become a " + newRankName + " (1 bonus skill)<br>";
+    else tmpinput12text = tmpinput12text + "; You did not receive a Commission.<br>";
+    
+    updateHistory(tmpinput12text);
+    input12text=input12text+tmpinput12text;
+    
+    if ( madeCommissionRoll > 0 ) addCommissionSkills();    
+  }
+
+  if ( Rank<maxRank[Career] && (Rank>0 || madeCommissionRoll>0) && madeSurvivalRoll == 1 )
+  {
+    if ( madePromotionRoll > 0 ) newRankName=implementPromotion();
+
+    tmpinput12text = "Promotion Roll = " + promotionRoll + " (" + promotionRollNeeded[Career] + " required)";
+    if ( madePromotionRoll == 2 ) tmpinput12text = tmpinput12text + "; You were Promoted to " + newRankName + " (2 bonus skills)<br>";
+    else if ( madePromotionRoll == 1 ) tmpinput12text = tmpinput12text + "; You received a Promotion to " + newRankName + " (1 bonus skill)<br>";
+    else tmpinput12text = tmpinput12text + "; You were not Promoted.<br>";
+
+    updateHistory(tmpinput12text);
+    input12text=input12text+tmpinput12text;
+  }
+
+  tmpinput12text = "Special Duty Roll = " + specialRoll + " (" + specialRollNeeded[Career] + " required)";
+  if ( madeSpecialRoll == 2 ) tmpinput12text = tmpinput12text + "; You were given Special Duties (2 bonus skills)<br>";
+  else if ( madeSpecialRoll == 1 ) tmpinput12text = tmpinput12text + "; You were given Special Duties (1 bonus skill)<br>";
+  else tmpinput12text = tmpinput12text + "; You were not given Special Duties.<br>";
+
+  updateHistory(tmpinput12text);
+  input12text=input12text+tmpinput12text;
+
+  if ( madeSurvivalRoll>0 )
+  {
+    tmpinput12text = "Reenlistment Roll = " + reenlistRoll + " (" + reenlistRollNeeded[Career] + " required)";
+    if ( madeReenlistRoll == 2 ) tmpinput12text = tmpinput12text + "; You are required to serve another term.<br>";
+    else if ( madeReenlistRoll == 1 ) tmpinput12text = tmpinput12text + "; You have the option of serving another term.<br>";
+    else tmpinput12text = tmpinput12text + "; Your services are no longer required.<br>";
+    
+    updateHistory(tmpinput12text);
+    input12text=input12text+tmpinput12text;
+  }
+  
+  setDivText("input11","Term "+Terms+":");
+  setDivText("input12",input12text);
+  setDivText("input21","");
+  setDivText("input22","");
+  displaySkillTables();
+  
+  histText=skillsToAdd+" skills to add:<br>";
+  updateHistory(histText);
+  addNextSkill();
+}
+
+function implementCommission()
+{
+  Rank = 1;
+  if ( Career == crNoble )
+  {
+    if ( UPPval[stSocial] == 10 )
+    {
+      UPPval[stSocial]=11;
+      UPP[stSocial]='B';
+      displayUPP();
+      updateHistory("commission skill:");
+      increaseSkill(skIncreaseSocial);
+    }
+    Rank = UPPval[stSocial] - 10;
+  }
+  setDivText("summ6",ranksTable[Career][Rank - 1] + " (Rank " + Rank + ")");
+  return ranksTable[Career][Rank - 1];
+}
+
+function addCommissionSkills()
+{
+  // Some careers gain skills on commission
+  if ( Career == crMarines ) 
+  {
+    histText = "commission skill:";
+    updateHistory(histText);
+    increaseSkill(skHandgun);
+  }
+  if ( Career == crArmy ) 
+  {
+    histText = "commission skill:";
+    updateHistory(histText);
+    increaseSkill(skSubmachinegun);
+  }
+}
+
+function implementPromotion()
+{
+  Rank = Rank + 1;
+  if ( Career == crNoble )
+  {
+    UPPval[stSocial] = UPPval[stSocial] + 1;
+    UPP[stSocial] = statToHex(UPPval[stSocial]);
+    displayUPP();
+    updateHistory("rank skill:");
+    increaseSkill(skIncreaseSocial);
+  }
+  setDivText("summ6",ranksTable[Career][Rank - 1] + " (Rank " + Rank + ")");
+  return ranksTable[Career][Rank - 1];
+}
+
+function addPromotionSkills()
+{
+  // Need to add career skills
+  if ( Career == crNavy && Rank == 5 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skIncreaseSocial);
+  }
+  if ( Career == crNavy && Rank == 6 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skIncreaseSocial);
+  }
+  if ( Career == crSailor && Rank == 2 )
+  {
+    updateHistory("rank skill:"); 
+    increaseSkill(skLargeWatercraft);
+  }
+  if ( Career == crLawEnf && Rank == 4 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skInterrogation);
+  }
+  if ( Career == crLawEnf && Rank == 5 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skAdmin);
+  }
+  if ( Career == crLawEnf && Rank == 6 )
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skLiaison);
+  }
+  if ( Career == crMerchant && Rank == 4 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skPilot);
+  }
+  if ( Career == crPirate && Rank == 4 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skPilot);
+  }
+  if ( Career == crBarbarian && Rank == 2 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skBladeCombat);
+  }
+  if ( Career == crBarbarian && Rank == 5 ) 
+  {
+    updateHistory("rank skill:");
+    increaseSkill(skLeader);
+  }
+}
+
+function addNextSkill()
+{
+  if ( skillsToAdd>1 ) input22text=skillsToAdd + " skills to add. ";
+  else input22text=skillsToAdd + " skill to add. ";
+  input22text = input22text + "Use which table ";
+  input22text = input22text + "<select onchange=\"javascript:rollNextSkill(this.value)\">";
+  input22text = input22text + "<option value=none>Choose...</option>";
+  input22text = input22text + "<option value=0>Personal Development</option>";
+  input22text = input22text + "<option value=1>Service Skills</option>";
+  input22text = input22text + "<option value=2>Advanced Education I</option>";
+  if ( UPPval[stEducation] >= 8 )
+  {
+    input22text = input22text + "<option value=3>Advanced Education II</option>";
+  }
+  input22text = input22text + "</select>";
+  setDivText("input22",input22text);
+}
+    
+function rollNextSkill(whichTable)
+{
+  nextSkillRoll = rollDice(1);
+  nextSkillAdded = skillTables[Career][whichTable][nextSkillRoll - 1];
+  skillsToAdd = skillsToAdd - 1;
+  increaseSkill(nextSkillAdded);
+  if ( skillCascade[nextSkillAdded]>0 )
+  {
+    manageCascadeQueue("");
+  }
+  else
+  {
+    setExperience();
+    calcSkillTotal();
+    summ11text=SkillTotal+" / "+Experience;
+    setDivText("summ11",summ11text);
+  
+    input22text = "You receive the skill " + skillName[nextSkillAdded] + ". ";
+    if ( SkillTotal>Experience ) 
+    {
+      input22text = input22text + "However, your total skill level of "+SkillTotal+" is greater than Experience maximum of "+Experience+". ";
+      input22text = input22text + "Click <a href=\"javascript:removeSkill('basic');\">here</a> to remove a skill.";      
+    }
+    else if ( skillsToAdd>0 ) input22text = input22text + "<a href=\"javascript:addNextSkill();\">Continue..</a>";
+    else input22text = input22text + "<a href=\"javascript:completeTerm();\">Continue..</a>";
+    setDivText("input22",input22text);
+  }
+  
+}
+
+function displaySkillTables()
+{
+  input31text = "Available Skills:";
+  input32text = "<table border=2><tr><th>Personal Development</th>";
+  input32text = input32text + "<th>Service Skills</th>";
+  input32text = input32text + "<th>Advanced Education I</th>";
+  if ( UPPval[stEducation]>=8 ) input32text = input32text + "<th>Advanced Education II</th>";
+  input32text = input32text + "</tr>";
+  for ( i=0; i<6; i++ )
+  {
+    nextSkillEntry = skillTables[Career][0][i];
+    input32text = input32text + "<tr><td align=center>"
+    if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "<u>";
+    input32text = input32text + skillName[nextSkillEntry];
+    if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "</u>";
+    input32text = input32text + "</td>";
+
+    nextSkillEntry = skillTables[Career][1][i];
+    input32text = input32text + "<td align=center>"
+    if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "<u>";
+    input32text = input32text + skillName[nextSkillEntry];
+    if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "</u>";
+    input32text = input32text + "</td>";
+
+    nextSkillEntry = skillTables[Career][2][i];
+    input32text = input32text + "<td align=center>"
+    if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "<u>";
+    input32text = input32text + skillName[nextSkillEntry];
+    if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "</u>";
+    input32text = input32text + "</td>";
+
+    if ( UPPval[stEducation] >= 8 )
+    {
+      nextSkillEntry = skillTables[Career][3][i];
+      input32text = input32text + "<td align=center>"
+      if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "<u>";
+      input32text = input32text + skillName[nextSkillEntry];
+      if ( skillCascade[nextSkillEntry] > 0 ) input32text = input32text + "</u>";
+      input32text = input32text + "</td>";
+    }
+    
+    input32text = input32text + "</tr>";
+  }
+  input32text=input32text + "</table>"
+  
+  setDivText("input31",input31text);
+  setDivText("input32",input32text);
+}
+
+function completeTerm()
+{
+  setDivText("input12","");
+  setDivText("input22","");
+  setDivText("input31","");
+  setDivText("input32","");
+  if ( Terms >= 4 ) doAging();
+  else doReenlistment();
+}
+
+function doAging()
+{
+  if ( Terms<8 )
+  {
+    strengthAgingRollNeeded = 8;
+    dexterityAgingRollNeeded = 7;
+    enduranceAgingRollNeeded = 8;
+  }
+  else
+  {
+    strengthAgingRollNeeded = 9;
+    dexterityAgingRollNeeded = 8;
+    enduranceAgingRollNeeded = 9;  
+  }
+  strengthAgingRoll = rollDice(2);
+  dexterityAgingRoll = rollDice(2);
+  enduranceAgingRoll = rollDice(2);
+  
+  input12text = "You now undergo the effects of aging:<br>";
+  tmpinput12text = "Strength Aging Roll = " + strengthAgingRoll + " (" + strengthAgingRollNeeded + "+ needed) ";
+  if ( strengthAgingRoll >= strengthAgingRollNeeded ) tmpinput12text = tmpinput12text + "- you avoid the effects of aging<br>";
+  else
+  {
+    UPPval[stStrength]=UPPval[stStrength]-1;
+    UPP[stStrength]=statToHex(UPPval[stStrength]);
+    displayUPP();
+    tmpinput12text = tmpinput12text + "- your strength has reduced from " + (UPPval[stStrength]-0+1) + " to " + UPPval[stStrength] + "<br>";
+  }
+  tmpinput12text = tmpinput12text + "Dexteriry Aging Roll = " + dexterityAgingRoll + " (" + dexterityAgingRollNeeded + "+ needed) ";
+  if ( dexterityAgingRoll >= dexterityAgingRollNeeded ) tmpinput12text = tmpinput12text + "- you avoid the effects of aging<br>";
+  else
+  {
+    UPPval[stDexterity]=UPPval[stDexterity]-1;
+    UPP[stDexterity]=statToHex(UPPval[stDexterity]);
+    displayUPP();
+    tmpinput12text = tmpinput12text + "- your dexterity has reduced from " + (UPPval[stDexterity]-0+1) + " to " + UPPval[stDexterity] + "<br>";
+  }
+  tmpinput12text = tmpinput12text + "Endurance Aging Roll = " + enduranceAgingRoll + " (" + enduranceAgingRollNeeded + "+ needed) ";
+  if ( enduranceAgingRoll >= enduranceAgingRollNeeded ) tmpinput12text = tmpinput12text + "- you avoid the effects of aging<br>";
+  else
+  {
+    UPPval[stEndurance]=UPPval[stEndurance]-1;
+    UPP[stEndurance]=statToHex(UPPval[stEndurance]);
+    displayUPP();
+    tmpinput12text = tmpinput12text + "- your endurance has reduced from " + (UPPval[stEndurance]-0+1) + " to " + UPPval[stEndurance] + "<br>";
+  }
+  
+  input12text=input12text + tmpinput12text;
+  setDivText("input12",input12text);
+  
+  updateHistory(tmpinput12text);
+  
+  input22text="<a href=\"javascript:doReenlistment();\">Continue..</a>";
+  setDivText("input22",input22text);
+}
+
+function doReenlistment()
+{
+  needDisclaimer=1;
+  if ( madeSurvivalRoll == 0 ) input12text = "You have been invalided out.";
+  else if ( madeReenlistRoll == 2 ) input12text = "You are required to reenlist.";
+  else if ( Terms >= 7 ) input12text = "You have come to the end of your career.";
+  else if ( madeReenlistRoll == 1 ) 
+  {
+    input12text = "You have the option of reenlisting.";
+    needDisclaimer=0;
+  }
+  else input12text = "Your services are no longer required."
+  if ( needDisclaimer == 1 ) input12text = input12text + "<br>However this script will not enforce reenlistment options - it is upto you.";
+  setDivText("input12",input12text);
+  
+  input22text = "<a href=\"javascript:doNextTerm();\">Reenlist</a>&nbsp;&nbsp;&nbsp;";
+  input22text = input22text + "<a href=\"javascript:doMusteringOut();\">Muster Out</a>";
+  setDivText("input22",input22text);
+}
+
+function doMusteringOut()
+{
+  totalMusterRolls=Terms;
+  if ( Rank>0 ) totalMusterRolls = totalMusterRolls + 1;
+  if ( Rank>2 ) totalMusterRolls = totalMusterRolls + 1;
+  if ( Rank>4 ) totalMusterRolls = totalMusterRolls + 1;
+  if ( Rank>4 ) benefitMusterBonus = 1;
+  else benefitMusterBonus = 0;
+  if ( Terms>4 || skillValue[skGambling]>0 || ( Career==crBelter && skillValue[skProspecting]>0 ) ) cashMusterBonus=1;
+  else cashMusterBonus=0;
+  takenMusterRolls=0;
+  takenCashRolls=0;
+  if ( totalMusterRolls>1 ) inpu12text = "You have " + totalMusterRolls + " mustering out rolls available ";
+  else input12text = "You have 1 mustering out roll available";
+  if ( totalMusterRolls>3 ) input12text = inpu12text + "(at most 3 on the cash table)<br>";
+  else input12text = input12text + "<br>";
+  if ( benefitMusterBonus>0 ) input12text = input12text + "You will receive a +1 bonus on the Benefits table<br>";
+  if ( cashMusterBonus>0 ) input12text = input12text + "You will receive a +1 bonus on the Cash table<br>";
+
+  histText="<br>MUSTERING OUT ("+totalMusterRolls+" rolls)<br>";
+  updateHistory(histText);
+
+  setDivText("input11","Mustering Out:");
+  setDivText("input12",input12text);
+  setDivText("input22","");
+  displayMusterTables();
+  
+  Cash=0;
+  for ( i=0; i<24; i++ ) benefitCount[i]=0;
+  
+  if ( Terms>4 ) Pension = 2000*Terms; 
+  else Pension=0;
+  setDivText("summ9", Pension + " Cr/Year");
+  setDivText("summ8", Cash + " Cr");
+
+  promptForMusteringRoll();
+}
+
+function promptForMusteringRoll()
+{
+  if ( takenMusterRolls < totalMusterRolls )
+  {
+    rollsLeft = totalMusterRolls - takenMusterRolls;
+    input22text = rollsLeft + " rolls left. Which table: ";
+    if ( takenCashRolls < 3 ) input22text = input22text + "<a href=\"javascript:doCashRoll()\">Cash</a>";
+    input22text = input22text + "&nbsp;&nbsp;<a href=\"javascript:doBenefitsRoll()\">Benefits</a>";
+  }
+  else
+  {
+    input22text = "";
+    setDivText("input11","");
+    setDivText("input12","Congratulations. Character Complete!");
+    setDivText("input21","");
+    setDivText("input31","");
+    input32text="";
+    setDivText("input32",input32text);
+    histText="<br>Character Complete<br>";
+    updateHistory(histText);
+  }
+  setDivText("input22",input22text);
+}
+
+function doCashRoll()
+{
+  takenMusterRolls = takenMusterRolls + 1;
+  takenCashRolls = takenCashRolls + 1;
+
+  diceRoll = rollDice(1);
+  if ( cashMusterBonus == 1 ) diceRoll = diceRoll + 1;
+  cashBonus = cashTable[Career][diceRoll - 1];
+  input22text = "You rolled " + diceRoll + " = " + cashBonus + " Cr. ";
+  Cash = Cash + cashBonus;
+  setDivText("summ8", Cash + " Cr");
+  
+  histText="cash roll of "+diceRoll+" - "+cashBonus+" Cr. <br>";
+  updateHistory(histText);
+
+  input22text = input22text + "<a href=\"javascript:promptForMusteringRoll();\">Continue..</a>";
+  setDivText("input22",input22text);
+}
+
+function doBenefitsRoll()
+{
+  takenMusterRolls = takenMusterRolls + 1;
+  diceRoll = rollDice(1);
+  if ( benefitMusterBonus == 1 ) diceRoll = diceRoll + 1;
+  benefitBonus = benefitsTable[Career][diceRoll - 1];
+
+  histText="benefits roll of "+diceRoll+" - "+benefitName[benefitBonus]+"<br>";
+  updateHistory(histText);
+  
+  benefitCount[benefitBonus] = benefitCount[benefitBonus] + 1;
+  if ( benefitBonus == bn1Int || benefitBonus == bn2Int ) increaseSkill(skIncreaseIntelligence);
+  if ( benefitBonus == bn2Int ) increaseSkill(skIncreaseIntelligence);
+  if ( benefitBonus == bn1Edu || benefitBonus == bn2Edu ) increaseSkill(skIncreaseEducation);
+  if ( benefitBonus == bn2Edu ) increaseSkill(skIncreaseEducation);
+  if ( benefitBonus == bn1Soc || benefitBonus == bn2Soc ) increaseSkill(skIncreaseSocial);
+  if ( benefitBonus == bn2Soc ) increaseSkill(skIncreaseSocial);
+  if ( benefitBonus == bnLoseSoc )
+  {
+    UPPval[stSocial] = UPPval[stSocial] - 1;
+    UPP[stSocial] = statToHex(UPPval[stSocial]);
+    displayUPP();
+  }
+
+  input22text = "You rolled " + diceRoll + " = " + benefitName[benefitBonus] + ". ";
+  if ( benefitBonus == bnWeapon )
+  {
+    chooseWeapon(input22text);
+  }
+  else
+  {
+    input22text = input22text + "<a href=\"javascript:promptForMusteringRoll();\">Continue..</a>";
+    setDivText("input22",input22text);
+  
+    displayBenefits();
+  }
+}
+
+function chooseWeapon(displayString)
+{
+  input22text = displayString;
+  input22text = input22text + "&nbsp;&nbsp;<select onchange=\"javascript:getNewWeapon(this.value)\">";
+  input22text = input22text + "<option value=none>Choose Weapon...</option>";
+  for ( j=0; j<numTypesOfWeapon; j++ )
+  {
+    input22text = input22text + "<option value=" + j + ">" + skillName[isWeapon[j]];
+    if ( gotWeapon[j] == 1 ) input22text = input22text + " (skill)";
+    input22text = input22text + "</option>";
+  }
+  input22text = input22text + "</select>";
+  setDivText("input22",input22text);
+}
+
+function getNewWeapon(weaponNum)
+{
+  if ( gotWeapon[weaponNum] == 1 ) increaseSkill(isWeapon[weaponNum]);
+  else 
+  {
+    gotWeapon[weaponNum]=1;
+    histText=" chose "+skillName[isWeapon[weaponNum]]+"<br>";
+    updateHistory(histText);
+  }
+
+  input22text = "<a href=\"javascript:promptForMusteringRoll();\">Continue..</a>";
+  setDivText("input22",input22text);
+  
+  displayBenefits();
+}
+
+function displayBenefits()
+{
+  benefitSummary = "";
+  gotAny=0;
+  for ( i=0; i<24; i++ )
+  {
+    if ( i==3 || i==4 || i==5 || i==6 || i==9 || i==10 || i==20 || i==23 )
+    {
+      // Nothing to display here
+    }
+    else if ( i == bnWeapon && benefitCount[i] > 0 )
+    {
+      // Special case - may choose weapon or skill in previously taken weapon.
+      for ( j=0; j<numTypesOfWeapon; j++ )
+      {
+        if ( gotWeapon[j] == 1 )
+        {
+          if ( gotAny > 0 ) benefitSummary = benefitSummary + ", ";
+          gotAny=1;
+          benefitSummary = benefitSummary + skillName[isWeapon[j]];
+        }
+      }      
+    }
+    else if ( (i==bnTravellers || i==bnScoutShip || i==bnCorsair) && benefitCount[i] > 0 )
+    {
+      // Multiple assignments are wasted
+      if ( gotAny > 0 ) benefitSummary = benefitSummary + ", ";
+      gotAny=1;
+      benefitSummary = benefitSummary + benefitName[i];
+    }
+    else if ( (i==bnTrader || i==bnLabShip || i==bnYacht || i==bnSeeker || i==bnSafariShip) && benefitCount[i] > 0 )
+    {
+      // For these ships, extra assignments knock 10 years off mortgage
+      if ( gotAny > 0 ) benefitSummary = benefitSummary + ", ";
+      gotAny=1;
+      benefitSummary = benefitSummary + benefitName[i];
+      if ( benefitCount[i]>1 ) 
+      {
+        yearsPaid = (benefitCount[i]-1)*10;
+        benefitSummary = benefitSummary + " (" + yearsPaid + " years paid)";
+      }
+    }
+    else if ( benefitCount[i] > 0 )
+    {
+      if ( gotAny > 0 ) benefitSummary = benefitSummary + ", ";
+      gotAny=1;
+      benefitSummary = benefitSummary + benefitName[i];
+      if ( benefitCount[i]>1 ) benefitSummary = benefitSummary + " (x" + benefitCount[i] + ")";
+    }
+  }
+  setDivText("summ10",benefitSummary);
+}
+
+function displayMusterTables()
+{
+  setDivText("input32","Steady..");
+  input31text = "Tables:";
+  setDivText("input31",input31text);
+  input32text = "<table border=2><tr><th>Roll</th><th>Cash</th>";
+  input32text = input32text + "<th>Benefits</th>";
+  input32text = input32text + "</tr>";
+  for ( i=0; i<7; i++ )
+  {
+    dRoll = i+1;
+    input32text = input32text + "<tr><td align=center>" + dRoll + "</td>";
+    nextEntry = cashTable[Career][i];
+    input32text = input32text + "<td align=center>";
+    input32text = input32text + nextEntry;
+    input32text = input32text + "</td>";
+
+    nextEntry = benefitName[benefitsTable[Career][i]];
+    input32text = input32text + "<td align=center>";
+    input32text = input32text + nextEntry;
+    input32text = input32text + "</td></tr>";
+  }
+  input32text = input32text + "</table>";
+  
+  setDivText("input32",input32text);
+}
+
+function showhelp()
+{
+  text="<a href=\"javascript:hidehelp();\">Click here to remove help</a><br>";
+  text=text+"This web page allows generation of MegaTraveller characters ";
+  text=text+"using the standard generation method. All processing is run from ";
+  text=text+"within this web page. The advantage is that the page is ";
+  text=text+"standalone and can be loaded into any browser with javascript ";
+  text=text+"capabilities. The downside is that partially generated ";
+  text=text+"characters will be lost if you move to a new web page and ";
+  text=text+"finished characters should be copied and pasted into an editor ";
+  text=text+"or printed. This is work in progress. <BR><BR>";
+  text=text+"V1.1 - May 2010 - Addition of Max Experience rule and viewable chargen history<br>";
+  text=text+"V1.1.1 - May 2010 - Bugfix to correct broken code in Army/Marines commission skills<br><br>";
+  setDivText('helpdiv',text);
+}
+
+function hidehelp()
+{
+  text="<a href=\"javascript:showhelp();\">Click here for help</a>";
+  setDivText('helpdiv',text);
+}
+
+function showHistory()
+{
+  text="<a href=\"javascript:hideHistory();\">hide detailed history</a><br>";
+  text=text+ChargenHistory;
+  setDivText('summ12',text);
+  HistoryVisible=1;
+}
+
+function hideHistory()
+{
+  text="<a href=\"javascript:showHistory();\">show detailed history</a><br>";
+  setDivText('summ12',text);
+  HistoryVisible=0;
+}
+
+function updateHistory(newString)
+{
+  ChargenHistory=ChargenHistory + newString;
+  if ( HistoryVisible == 1 ) showHistory();
+}
+
+</script>
+</head>
+
+<body>
+<h1>MegaTraveller Basic Character Generator</h1>
+<div id=helpdiv><a href="javascript:showhelp();">Click here for help</a></div>
+<h3>Decision Making</h3>
+<form>
+<table> <!-- this portion will be used for working -->
+<tr>
+<td valign=top><div id="input11">Choose dice:</div></td>
+<td valign=top><div id="input12">
+ <select id=genDiceSelect onChange="javascript:changeGenDice(this.value)">
+ <option value="2d6">Two Dice</option>
+ <option value="3d6t12">Three Dice (use top 2)</option>
+ <option value="4d6t13">Four Dice (use 1st and 3rd)</option>
+ </select>
+</div></td>
+</tr>
+<tr>
+<td valign=top>
+ <div id="input21"><a href="javascript:generateUPP();">Generate UPP : </a></div>
+</td>
+<td valign=top><div id="input22">-</div></td>
+</tr>
+<tr>
+<td valign=top><div id="input31"></div></td>
+<td valign=top><div id="input32"></div></td>
+</tr>
+</table>
+</form>
+<h3>Character Summary</h3>
+<table border=2> <!-- this portion will be used to display character so far -->
+<tr>
+<td bgcolor=#cccc99 border=0 width=10% valign=top>UPP:</div></td>
+<td bgcolor=#cccc99 border=0 width=20% valign=top>&nbsp;<div id="summ1"></div></td>
+<td bgcolor=#cccc99 border=0 width=10% valign=top>HomeWorld:</td>
+<td bgcolor=#cccc99 border=0 width=60% valign=top>&nbsp;<div id="summ2"></div></td>
+</tr>
+<tr>
+<td bgcolor=#cccc99 border=0 valign=top>Age:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ3">18</td>
+<td bgcolor=#cccc99 border=0 valign=top>Terms: </td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ4">0</div></td>
+</tr>
+<tr>
+<td bgcolor=#cccc99 border=0 valign=top>Career:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ5">&nbsp;</div></td>
+<td bgcolor=#cccc99 border=0 valign=top>Rank:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ6">&nbsp;</div></td>
+</tr>
+<tr>
+<td bgcolor=#cccc99 border=0 valign=top>Skills:</td>
+<td colspan=3 bgcolor=#cccc99 border=0 valign=top><div id="summ7">&nbsp;</div></td>
+</tr>
+<tr>
+<td bgcolor=#cccc99 border=0 valign=top>Cash:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ8">&nbsp;</div></td>
+<td bgcolor=#cccc99 border=0 valign=top>Pension:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ9">&nbsp;</div></td>
+</tr>
+<tr>
+<td bgcolor=#cccc99 border=0 valign=top>Skills/Experience:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ11">&nbsp;</div></td>
+<td bgcolor=#cccc99 border=0 valign=top>Benefits:</td>
+<td bgcolor=#cccc99 border=0 valign=top><div id="summ10">&nbsp;</div></td>
+</tr>
+<td colspan=4 bgcolor=#cccc99 border=0 valign=top><div id="summ12"><a href="javascript:showHistory();">reveal detailed history</a></div></td>
+</table>
+
+<h3>Print to File</h3>
+<form>
+    <input type=button name=print value="Print" onClick="window.print()">
+</form>
+
+</body>
+</html>
+
